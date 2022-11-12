@@ -1,4 +1,5 @@
 import { Errors } from "@/constants/errors.constants"
+import { AudioModel } from "@/models/audio.model"
 
 class AudioService {
   constructor() {
@@ -9,6 +10,16 @@ class AudioService {
 
   protected get hasDefect() {
     return this.element.HAVE_NOTHING || this.element.NETWORK_EMPTY
+  }
+
+  change(audio: AudioModel) {
+    return new Promise((resolve) => {
+      this.element.src = audio.url
+
+      this.element.addEventListener('loadeddata', () => {
+        resolve(true)
+      })
+    })
   }
 
   play() {

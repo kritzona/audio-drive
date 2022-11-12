@@ -1,4 +1,5 @@
 import { Stores } from '@/constants/stores.constants'
+import { AudioModel } from '@/models/audio.model'
 import { PlayerModel } from '@/models/player.model'
 import audioService from '@/services/audio.service'
 import { defineStore } from 'pinia'
@@ -17,13 +18,10 @@ export const usePlayerStore = defineStore<Stores, PlayerModel>(
   () => {
     const state = shallowReactive<PlayerModel>(createState())
 
-    const reset = () => {
-      usePlayerStore().$reset()
-    }
-
-    const setup = async (audio: PlayerModel['audio']) => {
+    const setup = async (audio: AudioModel) => {
       reset()
 
+      await audioService.change(audio)
       state.audio = audio
 
       await play()
@@ -56,6 +54,10 @@ export const usePlayerStore = defineStore<Stores, PlayerModel>(
 
     const updateSecondsElapsed = (seconds: number) => {
       state.elapsedSeconds = seconds
+    }
+
+    const reset = () => {
+      usePlayerStore().$reset()
     }
 
     return {

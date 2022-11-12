@@ -1,6 +1,8 @@
+import { AudioModel } from "./audio.model"
+
 export interface PlayerModel {
   /** TODO: необходимо добавить модель аудио-файла */
-  audio: Record<string, unknown> | null;
+  audio: AudioModel | null;
   playing: boolean;
   stoped: boolean;
   elapsedSeconds: number;
