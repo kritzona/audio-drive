@@ -2,7 +2,7 @@ import { Stores } from '@/constants/stores.constants'
 import { PlayerModel } from '@/models/player.model'
 import audioService from '@/services/audio.service'
 import { defineStore } from 'pinia'
-import { reactive } from 'vue'
+import { shallowReactive } from 'vue'
 
 const createState = (): PlayerModel => ({
   audio: null,
@@ -15,7 +15,7 @@ const createState = (): PlayerModel => ({
 export const usePlayerStore = defineStore<Stores, PlayerModel>(
   Stores.PLAYER,
   () => {
-    const state = reactive<PlayerModel>(createState())
+    const state = shallowReactive<PlayerModel>(createState())
 
     const reset = () => {
       usePlayerStore().$reset()
