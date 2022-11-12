@@ -2,6 +2,7 @@ import { Stores } from '@/constants/stores.constants'
 import { PlayerModel } from '@/models/player.model'
 import audioService from '@/services/audio.service'
 import { defineStore } from 'pinia'
+import { reactive } from 'vue'
 
 const createState = (): PlayerModel => ({
   audio: null,
@@ -13,55 +14,57 @@ const createState = (): PlayerModel => ({
 
 export const usePlayerStore = defineStore<Stores, PlayerModel>(
   Stores.PLAYER,
-  {
-    state: () => createState(),
+  () => {
+    const state = reactive<PlayerModel>(createState())
 
-    actions: {
-      async setup(audio: PlayerModel['audio']) {
-        this.$reset();
+    const reset = () => {
+      usePlayerStore().$reset()
+    }
 
-        this.audio = audio;
+    const setup = async (audio: PlayerModel['audio']) => {
+      reset()
 
-        try {
-          await audioService.play();
+      state.audio = audio
 
-          this.playing = true;
-          this.stoped = false;
-        } catch {
-          this.hasError = true;
-        }
-      },
+      await play()
+    }
 
-      async play() {
-        try {
-          await audioService.play();
+    const play = async () => {
+      try {
+        await audioService.play()
 
-          this.playing = true;
-          this.stoped = false;
-        } catch {
-          this.hasError = true;
-        }
-      },
+        state.playing = true
+        state.stoped = false
+      } catch {
+        state.hasError = true
+      }
+    }
 
-      pause() {
-        audioService.pause();
+    const pause = () => {
+      audioService.pause()
 
-        this.playing = false;
-        this.stoped = false;
-      },
+      state.playing = false
+      state.stoped = false
+    }
 
-      stop() {
-        audioService.stop();
+    const stop = () => {
+      audioService.stop()
 
-        this.playing = false;
-        this.stoped = true;
-      },
+      state.playing = false
+      state.stoped = true
+    }
 
-      updateSecondsElapsed(seconds: number) {
-        this.elapsedSeconds = seconds;
-      },
-    },
+    const updateSecondsElapsed = (seconds: number) => {
+      state.elapsedSeconds = seconds
+    }
 
-    getters: {},
-  }
+    return {
+      ...state,
+      setup,
+      play,
+      pause,
+      stop,
+      updateSecondsElapsed,
+    }
+  },
 )
