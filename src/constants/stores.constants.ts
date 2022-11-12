@@ -1,3 +1,3 @@
 export enum Stores {
-  PLAYER = 'player'
+  PLAYER = 'player',
 }

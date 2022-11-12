@@ -1,5 +1,6 @@
 import { Stores } from '@/constants/stores.constants'
 import { PlayerModel } from '@/models/player.model'
+import audioService from '@/services/audio.service'
 import { defineStore } from 'pinia'
 
 const createState = (): PlayerModel => ({
@@ -16,26 +17,42 @@ export const usePlayerStore = defineStore<Stores, PlayerModel>(
     state: () => createState(),
 
     actions: {
-      setup(audio: PlayerModel['audio']) {
+      async setup(audio: PlayerModel['audio']) {
         this.$reset();
 
         this.audio = audio;
 
-        this.playing = true;
-        this.stoped = false;
+        try {
+          await audioService.play();
+
+          this.playing = true;
+          this.stoped = false;
+        } catch {
+          this.hasError = true;
+        }
       },
 
-      play() {
-        this.playing = true;
-        this.stoped = false;
+      async play() {
+        try {
+          await audioService.play();
+
+          this.playing = true;
+          this.stoped = false;
+        } catch {
+          this.hasError = true;
+        }
       },
 
       pause() {
+        audioService.pause();
+
         this.playing = false;
         this.stoped = false;
       },
 
       stop() {
+        audioService.stop();
+
         this.playing = false;
         this.stoped = true;
       },
