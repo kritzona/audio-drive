@@ -6,6 +6,7 @@ import * as directives from 'vuetify/directives'
 import { createPinia } from 'pinia'
 import { createVuetify } from 'vuetify'
 import { createRouter, createWebHistory } from 'vue-router'
+import routes from '@/routes'
 
 const app = createApp(App)
 
@@ -20,7 +21,7 @@ app.use(vuetify)
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [],
+  routes,
 })
 app.use(router)
 
