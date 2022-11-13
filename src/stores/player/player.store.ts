@@ -1,74 +1,71 @@
-import { Stores } from '@/constants/stores.constants'
-import { AudioModel } from '@/models/audio.model'
-import { PlayerModel } from '@/models/player.model'
-import audioService from '@/services/audio.service'
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { Stores } from '@/constants/stores.constants';
+import { AudioModel } from '@/models/audio.model';
+import { PlayerModel } from '@/models/player.model';
+import audioService from '@/services/audio.service';
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
-export const usePlayerStore = defineStore(
-  Stores.PLAYER,
-  () => {
-    const audio = ref<PlayerModel['audio']>(null)
-    const playing = ref<boolean>(false)
-    const stoped = ref<boolean>(true)
-    const elapsedSeconds = ref<number>(0)
-    const hasError = ref<boolean>(false)
+export const usePlayerStore = defineStore(Stores.PLAYER, () => {
+  const audio = ref<PlayerModel['audio']>(null);
+  const playing = ref<boolean>(false);
+  const stoped = ref<boolean>(true);
+  const elapsedSeconds = ref<number>(0);
+  const hasError = ref<boolean>(false);
 
-    const setup = async (newAudio: AudioModel) => {
-      reset()
+  const setup = async (newAudio: AudioModel) => {
+    reset();
 
-      await audioService.change(newAudio)
-      audio.value = newAudio
+    await audioService.change(newAudio);
+    audio.value = newAudio;
+  };
+
+  const play = async () => {
+    try {
+      await audioService.play();
+
+      playing.value = true;
+      stoped.value = false;
+    } catch {
+      hasError.value = true;
     }
+  };
 
-    const play = async () => {
-      try {
-        await audioService.play()
+  const pause = () => {
+    audioService.pause();
 
-        playing.value = true
-        stoped.value = false
-      } catch {
-        hasError.value = true
-      }
-    }
+    playing.value = false;
+    stoped.value = false;
+  };
 
-    const pause = () => {
-      audioService.pause()
+  const stop = () => {
+    audioService.stop();
 
-      playing.value = false
-      stoped.value = false
-    }
+    playing.value = false;
+    stoped.value = true;
+  };
 
-    const stop = () => {
-      audioService.stop()
+  const updateSecondsElapsed = (seconds: number) => {
+    elapsedSeconds.value = seconds;
+  };
 
-      playing.value = false
-      stoped.value = true
-    }
+  const reset = () => {
+    audio.value = null;
+    playing.value = false;
+    stoped.value = true;
+    elapsedSeconds.value = 0;
+    hasError.value = false;
+  };
 
-    const updateSecondsElapsed = (seconds: number) => {
-      elapsedSeconds.value = seconds
-    }
-
-    const reset = () => {
-      audio.value = null
-      playing.value = false
-      stoped.value = true
-      elapsedSeconds.value = 0
-      hasError.value = false
-    }
-
-    return {
-      audio,
-      playing,
-      stoped,
-      elapsedSeconds,
-      hasError,
-      setup,
-      play,
-      pause,
-      stop,
-      updateSecondsElapsed,
-    }
-  },
-)
+  return {
+    audio,
+    playing,
+    stoped,
+    elapsedSeconds,
+    hasError,
+    setup,
+    play,
+    pause,
+    stop,
+    updateSecondsElapsed,
+  };
+});

@@ -15,28 +15,28 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue'
-import { createAudioMp3Mock } from '@/mocks/audio-mp3.mock'
-import { usePlayerStore } from '@/stores/player/player.store'
-import { Errors } from '@/constants/errors.constants'
-import PlayerControlPanel from './PlayerControlPanel.vue'
-import ErrorAlert from '../Alerts/ErrorAlert.vue'
+import { onMounted } from 'vue';
+import { createAudioMp3Mock } from '@/mocks/audio-mp3.mock';
+import { usePlayerStore } from '@/stores/player/player.store';
+import { Errors } from '@/constants/errors.constants';
+import PlayerControlPanel from './PlayerControlPanel.vue';
+import ErrorAlert from '../Alerts/ErrorAlert.vue';
 
-const playerStore = usePlayerStore()
+const playerStore = usePlayerStore();
 
 onMounted(() => {
-  playerStore.setup(createAudioMp3Mock())
-})
+  playerStore.setup(createAudioMp3Mock());
+});
 
 const handlePlay = () => {
-  playerStore.play()
-}
+  playerStore.play();
+};
 
 const handlePause = () => {
-  playerStore.pause()
-}
+  playerStore.pause();
+};
 
 const handleStop = () => {
-  playerStore.stop()
-}
+  playerStore.stop();
+};
 </script>

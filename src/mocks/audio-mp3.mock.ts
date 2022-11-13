@@ -1,4 +1,4 @@
-import { AudioModel } from "@/models/audio.model";
+import { AudioModel } from '@/models/audio.model';
 
 export const createAudioMp3Mock = (): AudioModel => ({
   id: '1',
@@ -8,4 +8,4 @@ export const createAudioMp3Mock = (): AudioModel => ({
   name: 'Молитва',
   author: 'kulinka',
   duration: 0,
-})
+});

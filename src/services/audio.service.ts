@@ -1,46 +1,46 @@
-import { Errors } from "@/constants/errors.constants"
-import { AudioModel } from "@/models/audio.model"
+import { Errors } from '@/constants/errors.constants';
+import { AudioModel } from '@/models/audio.model';
 
 class AudioService {
   constructor() {
-    this.element = new Audio()
+    this.element = new Audio();
   }
 
-  protected readonly element: HTMLAudioElement
+  protected readonly element: HTMLAudioElement;
 
   protected get hasDefect() {
-    return Boolean(this.element.HAVE_NOTHING || this.element.NETWORK_EMPTY)
+    return Boolean(this.element.HAVE_NOTHING || this.element.NETWORK_EMPTY);
   }
 
   change(audio: AudioModel) {
     return new Promise((resolve) => {
-      this.element.src = audio.url
+      this.element.src = audio.url;
 
       this.element.addEventListener('loadeddata', () => {
-        resolve(true)
-      })
-    })
+        resolve(true);
+      });
+    });
   }
 
   play() {
     return new Promise((resolve, reject) => {
       if (this.hasDefect) {
-        reject(Errors.PLAY)
+        reject(Errors.PLAY);
       }
 
-      resolve(this.element.play())
-    })
+      resolve(this.element.play());
+    });
   }
 
   pause() {
-    this.element.pause()
+    this.element.pause();
   }
 
   stop() {
-    this.element.currentTime = 0
+    this.element.currentTime = 0;
 
-    this.pause()
+    this.pause();
   }
 }
 
-export default new AudioService()
+export default new AudioService();

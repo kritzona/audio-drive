@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import Player from '@/components/Player/Player.vue'
+import Player from '@/components/Player/Player.vue';
 </script>
 
 <style scoped></style>

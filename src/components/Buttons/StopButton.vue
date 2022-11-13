@@ -1,9 +1,5 @@
 <template>
-  <v-btn
-    icon="mdi-stop"
-    color="secondary"
-  />
+  <v-btn icon="mdi-stop" color="secondary" />
 </template>
 
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>

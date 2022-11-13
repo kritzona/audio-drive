@@ -1,5 +1,5 @@
-import { RouteRecordRaw } from 'vue-router'
-import { Routes } from '@/constants/routes.constants'
+import { RouteRecordRaw } from 'vue-router';
+import { Routes } from '@/constants/routes.constants';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -7,6 +7,6 @@ const routes: RouteRecordRaw[] = [
     name: Routes.MAIN_PAGE,
     component: import('@/pages/main/MainPage.vue'),
   },
-]
+];
 
 export default routes;

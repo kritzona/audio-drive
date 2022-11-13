@@ -1,4 +1,4 @@
-import { AudioModel } from "./audio.model"
+import { AudioModel } from './audio.model';
 
 export interface PlayerModel {
   audio: AudioModel | null;
