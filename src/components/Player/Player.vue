@@ -22,7 +22,7 @@
         />
         <v-btn
           v-else
-          icon="mdi-pause-outline"
+          icon="mdi-pause"
           color="secondary"
           @click="handlePause"
         />
