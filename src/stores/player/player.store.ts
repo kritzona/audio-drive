@@ -19,8 +19,6 @@ export const usePlayerStore = defineStore(
 
       await audioService.change(newAudio)
       audio.value = newAudio
-
-      await play()
     }
 
     const play = async () => {

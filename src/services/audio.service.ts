@@ -9,7 +9,7 @@ class AudioService {
   protected readonly element: HTMLAudioElement
 
   protected get hasDefect() {
-    return this.element.HAVE_NOTHING || this.element.NETWORK_EMPTY
+    return Boolean(this.element.HAVE_NOTHING || this.element.NETWORK_EMPTY)
   }
 
   change(audio: AudioModel) {
@@ -28,9 +28,7 @@ class AudioService {
         reject(Errors.PLAY)
       }
 
-      this.element.addEventListener('canplaythrough', () => {
-        resolve(this.element.play())
-      })
+      resolve(this.element.play())
     })
   }
 
