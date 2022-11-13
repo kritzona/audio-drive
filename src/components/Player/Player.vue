@@ -1,16 +1,15 @@
 <template>
   <v-container class="player">
-    <v-row v-if="playerStore.hasError" justify="space-between" class="text-center">
-      <v-alert
-        icon="mdi-cloud-alert"
-        prominent
-        title="Text"
-        type="error"
-        variant="text"
-      >
-        {{ Errors.PLAY }}
-      </v-alert>
-    </v-row>
+    <v-alert
+      v-if="visibleErrorAlert"
+      icon="mdi-cloud-alert"
+      prominent
+      title="Ошибка"
+      type="error"
+      variant="text"
+    >
+      {{ Errors.PLAY }}
+    </v-alert>
 
     <v-row justify="space-between" class="text-center">
       <v-col>
@@ -41,6 +40,10 @@ const playerStore = usePlayerStore()
 
 const visiblePlayButton = computed(() => {
   return !playerStore.playing
+})
+
+const visibleErrorAlert = computed(() => {
+  return playerStore.hasError
 })
 
 onMounted(() => {
