@@ -1,50 +1,28 @@
 <template>
-  <v-container class="player">
-    <v-alert
-      v-if="visibleErrorAlert"
-      icon="mdi-cloud-alert"
-      prominent
-      title="Ошибка"
-      type="error"
-      variant="text"
-    >
+  <div class="player">
+    <ErrorAlert v-if="playerStore.hasError">
       {{ Errors.PLAY }}
-    </v-alert>
+    </ErrorAlert>
 
-    <v-row justify="space-between" class="text-center">
-      <v-col>
-        <v-btn
-          v-if="visiblePlayButton"
-          icon="mdi-play-outline"
-          color="primary"
-          @click="handlePlay"
-        />
-        <v-btn
-          v-else
-          icon="mdi-pause"
-          color="secondary"
-          @click="handlePause"
-        />
-      </v-col>
-    </v-row>
-  </v-container>
+    <PlayerControlPanel
+      :playing="playerStore.playing"
+      :stoped="playerStore.stoped"
+      @play="handlePlay"
+      @pause="handlePause"
+      @stop="handleStop"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue';
+import { onMounted } from 'vue'
 import { createAudioMp3Mock } from '@/mocks/audio-mp3.mock'
 import { usePlayerStore } from '@/stores/player/player.store'
-import { Errors } from '@/constants/errors.constants';
+import { Errors } from '@/constants/errors.constants'
+import PlayerControlPanel from './PlayerControlPanel.vue'
+import ErrorAlert from '../Alerts/ErrorAlert.vue'
 
 const playerStore = usePlayerStore()
-
-const visiblePlayButton = computed(() => {
-  return !playerStore.playing
-})
-
-const visibleErrorAlert = computed(() => {
-  return playerStore.hasError
-})
 
 onMounted(() => {
   playerStore.setup(createAudioMp3Mock())
@@ -57,6 +35,8 @@ const handlePlay = () => {
 const handlePause = () => {
   playerStore.pause()
 }
-</script>
 
-<style lang="scss" scoped></style>
+const handleStop = () => {
+  playerStore.stop()
+}
+</script>
