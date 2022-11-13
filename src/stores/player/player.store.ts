@@ -3,26 +3,22 @@ import { AudioModel } from '@/models/audio.model'
 import { PlayerModel } from '@/models/player.model'
 import audioService from '@/services/audio.service'
 import { defineStore } from 'pinia'
-import { shallowReactive } from 'vue'
-
-const createState = (): PlayerModel => ({
-  audio: null,
-  playing: false,
-  stoped: true,
-  elapsedSeconds: 0,
-  hasError: false,
-})
+import { ref } from 'vue'
 
 export const usePlayerStore = defineStore(
   Stores.PLAYER,
   () => {
-    const state = shallowReactive<PlayerModel>(createState())
+    const audio = ref<PlayerModel['audio']>(null)
+    const playing = ref<boolean>(false)
+    const stoped = ref<boolean>(true)
+    const elapsedSeconds = ref<number>(0)
+    const hasError = ref<boolean>(false)
 
-    const setup = async (audio: AudioModel) => {
+    const setup = async (newAudio: AudioModel) => {
       reset()
 
-      await audioService.change(audio)
-      state.audio = audio
+      await audioService.change(newAudio)
+      audio.value = newAudio
 
       await play()
     }
@@ -31,37 +27,45 @@ export const usePlayerStore = defineStore(
       try {
         await audioService.play()
 
-        state.playing = true
-        state.stoped = false
+        playing.value = true
+        stoped.value = false
       } catch {
-        state.hasError = true
+        hasError.value = true
       }
     }
 
     const pause = () => {
       audioService.pause()
 
-      state.playing = false
-      state.stoped = false
+      playing.value = false
+      stoped.value = false
     }
 
     const stop = () => {
       audioService.stop()
 
-      state.playing = false
-      state.stoped = true
+      playing.value = false
+      stoped.value = true
     }
 
     const updateSecondsElapsed = (seconds: number) => {
-      state.elapsedSeconds = seconds
+      elapsedSeconds.value = seconds
     }
 
     const reset = () => {
-      Object.assign(state, createState())
+      audio.value = null
+      playing.value = false
+      stoped.value = true
+      elapsedSeconds.value = 0
+      hasError.value = false
     }
 
     return {
-      ...state,
+      audio,
+      playing,
+      stoped,
+      elapsedSeconds,
+      hasError,
       setup,
       play,
       pause,
