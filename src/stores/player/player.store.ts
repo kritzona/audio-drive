@@ -13,7 +13,7 @@ const createState = (): PlayerModel => ({
   hasError: false,
 })
 
-export const usePlayerStore = defineStore<Stores, PlayerModel>(
+export const usePlayerStore = defineStore(
   Stores.PLAYER,
   () => {
     const state = shallowReactive<PlayerModel>(createState())
@@ -57,7 +57,7 @@ export const usePlayerStore = defineStore<Stores, PlayerModel>(
     }
 
     const reset = () => {
-      usePlayerStore().$reset()
+      Object.assign(state, createState())
     }
 
     return {
