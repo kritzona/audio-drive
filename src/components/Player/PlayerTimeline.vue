@@ -1,13 +1,13 @@
 <template>
   <v-slider
-    :model-value="ellapsedSeconds"
+    v-model="seconds"
     :color="primaryColor"
     :track-color="secondaryColor"
     min="0"
     :max="duration"
     :step="1"
     class="player-timeline"
-    @update:model-value="($event: number) => $emit('change', $event)"
+    @update:model-value="handleChange"
   >
     <template #prepend>
       <div class="text-caption player-timeline__current-time">
@@ -24,14 +24,16 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useTheme } from 'vuetify/lib/framework.mjs';
+import { debounce } from 'lodash';
 
-defineProps<{
+const props = defineProps<{
   duration: number;
   ellapsedSeconds: number;
 }>();
-defineEmits<{
+
+const emit = defineEmits<{
   (e: 'change', ellapsedSeconds: number): void;
 }>();
 
@@ -39,4 +41,11 @@ const theme = useTheme();
 
 const primaryColor = computed(() => theme.current.value.colors.primary);
 const secondaryColor = computed(() => theme.current.value.colors.secondary);
+
+/** Локальное хранение секунд нужно для сохранения источника правды
+ * и реализации debounce
+ * */
+const seconds = ref<number>(props.ellapsedSeconds);
+
+const handleChange = debounce((event: number) => emit('change', event), 100);
 </script>
