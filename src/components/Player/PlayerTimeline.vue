@@ -13,13 +13,13 @@
     >
       <template #prepend>
         <div class="text-caption player-timeline__current-time">
-          {{ ellapsedSeconds }}
+          {{ formattedEllapsedSeconds }}
         </div>
       </template>
 
       <template #append>
         <div class="text-caption player-timeline__duration">
-          {{ duration }}
+          {{ formattedDuration }}
         </div>
       </template>
     </v-slider>
@@ -30,8 +30,9 @@
 import { computed, ref } from 'vue';
 import { useTheme } from 'vuetify/lib/framework.mjs';
 import { debounce } from 'lodash';
+import { secondsToTime } from '@/utils/time.utils';
 
-defineProps<{
+const props = defineProps<{
   duration: number;
   ellapsedSeconds: number;
 }>();
@@ -44,6 +45,11 @@ const theme = useTheme();
 
 const primaryColor = computed(() => theme.current.value.colors.primary);
 const secondaryColor = computed(() => theme.current.value.colors.secondary);
+
+const formattedDuration = computed(() => secondsToTime(props.duration));
+const formattedEllapsedSeconds = computed(() =>
+  secondsToTime(props.ellapsedSeconds)
+);
 
 const focused = ref<boolean>(false);
 
