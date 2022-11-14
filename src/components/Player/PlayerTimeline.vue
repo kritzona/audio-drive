@@ -11,7 +11,7 @@
   >
     <template #prepend>
       <div class="text-caption player-timeline__current-time">
-        {{ ellapsedSeconds }}
+        {{ seconds }}
       </div>
     </template>
 
