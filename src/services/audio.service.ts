@@ -16,6 +16,10 @@ class AudioService {
     return new Promise((resolve) => {
       this.element.src = audio.url;
 
+      this.element.addEventListener('ended', () => {
+        this.setCurrentTime(0);
+      });
+
       this.element.addEventListener('loadeddata', () => {
         resolve(true);
       });
@@ -44,6 +48,14 @@ class AudioService {
 
   setCurrentTime(seconds: number) {
     this.element.currentTime = seconds;
+  }
+
+  listenTimeChange(callback: (seconds: number) => void) {
+    this.element.addEventListener('timeupdate', () => {
+      const currentTime = Math.floor(this.element.currentTime);
+
+      callback(currentTime);
+    });
   }
 }
 

@@ -23,6 +23,10 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
     try {
       await audioService.play();
 
+      audioService.listenTimeChange(
+        (seconds) => (elapsedSeconds.value = seconds)
+      );
+
       playing.value = true;
       stoped.value = false;
     } catch {
