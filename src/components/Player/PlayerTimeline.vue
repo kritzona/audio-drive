@@ -6,12 +6,14 @@
     min="0"
     :max="duration"
     :step="1"
+    :focused="focused"
     class="player-timeline"
     @update:model-value="handleChange"
+    @update:focused="handleFocus"
   >
     <template #prepend>
       <div class="text-caption player-timeline__current-time">
-        {{ seconds }}
+        {{ focused ? seconds : ellapsedSeconds }}
       </div>
     </template>
 
@@ -47,5 +49,13 @@ const secondaryColor = computed(() => theme.current.value.colors.secondary);
  * */
 const seconds = ref<number>(props.ellapsedSeconds);
 
-const handleChange = debounce((event: number) => emit('change', event), 100);
+const focused = ref<boolean>(false);
+
+const handleChange = debounce((event: number) => {
+  emit('change', event);
+
+  focused.value = false;
+}, 100);
+
+const handleFocus = (event: boolean) => (focused.value = event);
 </script>
