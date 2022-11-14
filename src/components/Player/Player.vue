@@ -4,6 +4,13 @@
       {{ Errors.PLAY }}
     </ErrorAlert>
 
+    <PlayerTrack
+      v-if="playerStore.audio"
+      :cover="playerStore.audio.cover"
+      :author="playerStore.audio.author"
+      :name="playerStore.audio.name"
+    />
+
     <PlayerControlPanel
       :playing="playerStore.playing"
       :stoped="playerStore.stoped"
@@ -21,6 +28,7 @@ import { usePlayerStore } from '@/stores/player/player.store';
 import { Errors } from '@/constants/errors.constants';
 import PlayerControlPanel from './PlayerControlPanel.vue';
 import ErrorAlert from '../Alerts/ErrorAlert.vue';
+import PlayerTrack from './PlayerTrack.vue';
 
 const playerStore = usePlayerStore();
 
