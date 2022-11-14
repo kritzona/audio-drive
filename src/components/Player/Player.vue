@@ -11,6 +11,13 @@
       :name="playerStore.audio.name"
     />
 
+    <PlayerTimeline
+      v-if="playerStore.audio"
+      :duration="100"
+      :ellapsed-seconds="playerStore.elapsedSeconds"
+      @change="(seconds) => playerStore.updateSecondsElapsed(seconds)"
+    />
+
     <PlayerControlPanel
       :playing="playerStore.playing"
       :stoped="playerStore.stoped"
@@ -29,6 +36,7 @@ import { Errors } from '@/constants/errors.constants';
 import PlayerControlPanel from './PlayerControlPanel.vue';
 import ErrorAlert from '../Alerts/ErrorAlert.vue';
 import PlayerTrack from './PlayerTrack.vue';
+import PlayerTimeline from './PlayerTimeline.vue';
 
 const playerStore = usePlayerStore();
 

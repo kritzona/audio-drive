@@ -45,6 +45,8 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   };
 
   const updateSecondsElapsed = (seconds: number) => {
+    audioService.setCurrentTime(seconds);
+
     elapsedSeconds.value = seconds;
   };
 

@@ -41,6 +41,10 @@ class AudioService {
 
     this.pause();
   }
+
+  setCurrentTime(seconds: number) {
+    this.element.currentTime = seconds;
+  }
 }
 
 export default new AudioService();
