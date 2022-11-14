@@ -1,31 +1,43 @@
 <template>
-  <div class="player">
-    <ErrorAlert v-if="playerStore.hasError">
-      {{ Errors.PLAY }}
-    </ErrorAlert>
+  <v-container class="player">
+    <v-row justify="space-between" align-content="center">
+      <v-col align-self="center">
+        <PlayerTrack
+          v-if="playerStore.audio"
+          :cover="playerStore.audio.cover"
+          :author="playerStore.audio.author"
+          :name="playerStore.audio.name"
+        />
+      </v-col>
 
-    <PlayerTrack
-      v-if="playerStore.audio"
-      :cover="playerStore.audio.cover"
-      :author="playerStore.audio.author"
-      :name="playerStore.audio.name"
-    />
+      <v-col align-self="center" class="d-flex flex-row justify-end">
+        <PlayerControlPanel
+          :playing="playerStore.playing"
+          :stoped="playerStore.stoped"
+          @play="handlePlay"
+          @pause="handlePause"
+          @stop="handleStop"
+        />
+      </v-col>
+    </v-row>
 
-    <PlayerTimeline
-      v-if="playerStore.audio"
-      :duration="100"
-      :ellapsed-seconds="playerStore.elapsedSeconds"
-      @change="(seconds) => playerStore.updateSecondsElapsed(seconds)"
-    />
+    <v-row>
+      <v-col>
+        <PlayerTimeline
+          v-if="playerStore.audio"
+          :duration="100"
+          :ellapsed-seconds="playerStore.elapsedSeconds"
+          @change="(seconds) => playerStore.updateSecondsElapsed(seconds)"
+        />
+      </v-col>
+    </v-row>
 
-    <PlayerControlPanel
-      :playing="playerStore.playing"
-      :stoped="playerStore.stoped"
-      @play="handlePlay"
-      @pause="handlePause"
-      @stop="handleStop"
-    />
-  </div>
+    <v-row>
+      <ErrorAlert v-if="playerStore.hasError">
+        {{ Errors.PLAY }}
+      </ErrorAlert>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts" setup>

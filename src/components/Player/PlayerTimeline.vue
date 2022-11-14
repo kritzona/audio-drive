@@ -1,28 +1,29 @@
 <template>
-  <v-slider
-    v-model="seconds"
-    :color="primaryColor"
-    :track-color="secondaryColor"
-    min="0"
-    :max="duration"
-    :step="1"
-    :focused="focused"
-    class="player-timeline"
-    @update:model-value="handleChange"
-    @update:focused="handleFocus"
-  >
-    <template #prepend>
-      <div class="text-caption player-timeline__current-time">
-        {{ focused ? seconds : ellapsedSeconds }}
-      </div>
-    </template>
+  <div class="player-timeline">
+    <v-slider
+      v-model="seconds"
+      :color="primaryColor"
+      :track-color="secondaryColor"
+      min="0"
+      :max="duration"
+      :step="1"
+      :focused="focused"
+      @update:model-value="handleChange"
+      @update:focused="handleFocus"
+    >
+      <template #prepend>
+        <div class="text-caption player-timeline__current-time">
+          {{ focused ? seconds : ellapsedSeconds }}
+        </div>
+      </template>
 
-    <template #append>
-      <div class="text-caption player-timeline__duration">
-        {{ duration }}
-      </div>
-    </template>
-  </v-slider>
+      <template #append>
+        <div class="text-caption player-timeline__duration">
+          {{ duration }}
+        </div>
+      </template>
+    </v-slider>
+  </div>
 </template>
 
 <script lang="ts" setup>

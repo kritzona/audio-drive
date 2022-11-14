@@ -1,5 +1,5 @@
 <template>
-  <div class="player-control-panel">
+  <div class="d-flex flex-row player-control-panel">
     <PlayButton v-if="visiblePlayButton" @click="() => $emit('play')" />
     <PauseButton v-else-if="visiblePauseButton" @click="() => $emit('pause')" />
 
@@ -28,3 +28,9 @@ const visiblePauseButton = computed(() => {
   return props.playing && !props.stoped;
 });
 </script>
+
+<style lang="scss" scoped>
+.player-control-panel {
+  width: min-content;
+}
+</style>
