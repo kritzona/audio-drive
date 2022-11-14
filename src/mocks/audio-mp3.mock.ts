@@ -8,5 +8,4 @@ export const createAudioMp3Mock = (): AudioModel => ({
   format: 'audio/mpeg',
   name: 'Summertime Sadness',
   author: 'Lana Del Rey',
-  duration: 0,
 });

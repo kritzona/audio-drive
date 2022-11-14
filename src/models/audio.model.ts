@@ -6,5 +6,4 @@ export interface AudioModel {
   format: string;
   name: string;
   author: string;
-  duration: number;
 }

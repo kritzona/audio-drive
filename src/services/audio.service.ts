@@ -12,6 +12,10 @@ class AudioService {
     return Boolean(this.element.HAVE_NOTHING || this.element.NETWORK_EMPTY);
   }
 
+  get duration() {
+    return Math.ceil(this.element.duration);
+  }
+
   change(audio: AudioModel) {
     return new Promise((resolve) => {
       this.element.src = audio.url;

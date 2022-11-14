@@ -25,7 +25,7 @@
       <v-col>
         <PlayerTimeline
           v-if="playerStore.audio"
-          :duration="100"
+          :duration="playerStore.duration"
           :ellapsed-seconds="playerStore.elapsedSeconds"
           @change="(seconds) => playerStore.updateSecondsElapsed(seconds)"
         />
