@@ -15,7 +15,9 @@
     "prepare": "husky install",
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "npx eslint src --ext .js,.jsx,.ts,.tsx,.json,.html,.vue",
+    "lint:fix": "npx eslint src --fix --ext .js,.jsx,.ts,.tsx,.json,.html,.vue"
   },
   "dependencies": {
     "lodash": "^4.17.21",
