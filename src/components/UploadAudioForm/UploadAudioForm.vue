@@ -1,28 +1,33 @@
 <template>
   <v-card class="mx-auto px-6 py-8" max-width="344">
-    <v-form class="upload-audio-form" @submit.prevent="handleSubmit">
+    <v-form ref="form" class="upload-audio-form" @submit.prevent="handleSubmit">
       <v-text-field
         v-model="name"
         :readonly="loading"
+        :rules="requiredTextRules"
         clearable
         hide-details="auto"
         label="Название"
         color="primary"
+        required
       />
 
       <v-text-field
         v-model="author"
         :readonly="loading"
+        :rules="requiredTextRules"
         clearable
         hide-details="auto"
         label="Исполнитель"
         class="mt-5"
         color="primary"
+        required
       />
 
       <v-file-input
         v-model="covers"
         :readonly="loading"
+        :rules="requiredFileRules"
         accept="image/png, image/jpeg, image/bmp"
         label="Обложка"
         color="primary"
@@ -34,6 +39,7 @@
       <v-file-input
         v-model="audios"
         :readonly="loading"
+        :rules="requiredFileRules"
         accept="audio/mpeg"
         label="Аудио-трек"
         color="primary"
@@ -59,18 +65,38 @@
 import { usePlayerStore } from '@/stores/player/player.store';
 import { ref } from 'vue';
 import { fileToBase64Url } from '@/utils/file.utils';
+import { VForm } from 'vuetify/components';
+import {
+  requiredFileRules,
+  requiredTextRules,
+} from '@/constants/validation-rules.constants';
 
 const playerStore = usePlayerStore();
 
-const loading = ref<boolean>(false);
+const form = ref<VForm>();
 
+const loading = ref<boolean>(false);
 const name = ref<string>('');
 const author = ref<string>('');
-
 const covers = ref<File[]>([]);
 const audios = ref<File[]>([]);
 
+const validate = async (): Promise<boolean> => {
+  if (!form.value) {
+    return false;
+  }
+
+  const { valid } = await form.value.validate();
+
+  return valid;
+};
+
 const handleSubmit = async () => {
+  const noValid = !(await validate());
+  if (noValid) {
+    return;
+  }
+
   const [coverFile] = covers.value;
   const [audioFile] = audios.value;
 
