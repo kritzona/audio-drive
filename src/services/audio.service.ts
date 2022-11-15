@@ -12,9 +12,17 @@ class AudioService {
     return Boolean(this.element.HAVE_NOTHING || this.element.NETWORK_EMPTY);
   }
 
+  get duration() {
+    return Math.ceil(this.element.duration);
+  }
+
   change(audio: AudioModel) {
     return new Promise((resolve) => {
       this.element.src = audio.url;
+
+      this.element.addEventListener('ended', () => {
+        this.setCurrentTime(0);
+      });
 
       this.element.addEventListener('loadeddata', () => {
         resolve(true);
@@ -40,6 +48,18 @@ class AudioService {
     this.element.currentTime = 0;
 
     this.pause();
+  }
+
+  setCurrentTime(seconds: number) {
+    this.element.currentTime = seconds;
+  }
+
+  listenTimeChange(callback: (seconds: number) => void) {
+    this.element.addEventListener('timeupdate', () => {
+      const currentTime = Math.floor(this.element.currentTime);
+
+      callback(currentTime);
+    });
   }
 }
 

@@ -2,10 +2,10 @@ import { AudioModel } from '@/models/audio.model';
 
 export const createAudioMp3Mock = (): AudioModel => ({
   id: '1',
-  url: '/mock-audio/kulinka.mp3',
-  fileName: 'kulinka.mp3',
+  url: '/mock-audio/LanaDelRey_SummertimeSadness.mp3',
+  fileName: 'LanaDelRey_SummertimeSadness.mp3',
+  cover: '/mock-covers/LanaDelRey_SummertimeSadness.jpeg',
   format: 'audio/mpeg',
-  name: 'Молитва',
-  author: 'kulinka',
-  duration: 0,
+  name: 'Summertime Sadness',
+  author: 'Lana Del Rey',
 });

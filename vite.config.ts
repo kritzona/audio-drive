@@ -1,11 +1,20 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import eslint from 'vite-plugin-eslint';
+import vuetify from 'vite-plugin-vuetify';
 
 export default defineConfig({
   mode: 'development',
 
-  plugins: [vue(), eslint()],
+  plugins: [
+    vue(),
+    eslint(),
+    vuetify({
+      styles: {
+        configFile: './src/assets/styles/settings.scss',
+      },
+    }),
+  ],
 
   root: './',
   base: '/',
