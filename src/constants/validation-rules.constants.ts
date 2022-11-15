@@ -1,9 +1,9 @@
+import { Messages } from './messages.constants';
+
 export const requiredFileRules = [
-  (files: File[]) => {
-    return Boolean(files.length) || 'Файл обязателен к загрузке';
-  },
+  (files: File[]) => Boolean(files.length) || Messages.REQUIRED_FILE,
 ];
 
 export const requiredTextRules = [
-  (text?: string) => Boolean(text) || 'Поле обязательно для заполнения',
+  (text?: string) => Boolean(text) || Messages.REQUIRED_TEXT,
 ];
