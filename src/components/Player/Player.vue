@@ -17,6 +17,8 @@
           @play="handlePlay"
           @pause="handlePause"
           @stop="handleStop"
+          @prev="handlePrev"
+          @next="handleNext"
         />
       </v-col>
     </v-row>
@@ -66,5 +68,13 @@ const handlePause = () => {
 
 const handleStop = () => {
   playerStore.stop();
+};
+
+const handlePrev = () => {
+  // TODO: Нужен стор с плейлистом для реализации
+};
+
+const handleNext = () => {
+  // TODO: Нужен стор с плейлистом для реализации
 };
 </script>
