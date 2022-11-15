@@ -12,9 +12,12 @@
     "url": "https://github.com/kritzona/audio-drive"
   },
   "scripts": {
+    "prepare": "husky install",
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "npx eslint src --ext .js,.jsx,.ts,.tsx,.json,.html,.vue",
+    "lint:fix": "npx eslint src --fix --ext .js,.jsx,.ts,.tsx,.json,.html,.vue"
   },
   "dependencies": {
     "lodash": "^4.17.21",
@@ -25,6 +28,8 @@
     "vuetify": "^3.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.2.0",
+    "@commitlint/config-conventional": "^17.2.0",
     "@types/lodash": "^4.14.188",
     "@types/moment": "^2.13.0",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
@@ -38,6 +43,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.7.0",
+    "husky": "^8.0.2",
     "prettier": "^2.7.1",
     "sass": "^1.56.1",
     "typescript": "^4.6.4",
