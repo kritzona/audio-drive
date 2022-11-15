@@ -1,0 +1,113 @@
+<template>
+  <v-card class="mx-auto px-6 py-8" max-width="344">
+    <v-form ref="form" class="upload-audio-form" @submit.prevent="handleSubmit">
+      <v-text-field
+        v-model="name"
+        :readonly="loading"
+        :rules="requiredTextRules"
+        clearable
+        hide-details="auto"
+        label="Название"
+        color="primary"
+        required
+      />
+
+      <v-text-field
+        v-model="author"
+        :readonly="loading"
+        :rules="requiredTextRules"
+        clearable
+        hide-details="auto"
+        label="Исполнитель"
+        class="mt-5"
+        color="primary"
+        required
+      />
+
+      <v-file-input
+        v-model="covers"
+        :readonly="loading"
+        :rules="requiredFileRules"
+        accept="image/png, image/jpeg, image/bmp"
+        label="Обложка"
+        color="primary"
+        prepend-icon="mdi-camera"
+        show-size
+        class="mt-5"
+      />
+
+      <v-file-input
+        v-model="audios"
+        :readonly="loading"
+        :rules="requiredFileRules"
+        accept="audio/mpeg"
+        label="Аудио-трек"
+        color="primary"
+        prepend-icon="mdi-music"
+        show-size
+      />
+
+      <v-btn
+        :loading="loading"
+        block
+        color="primary"
+        size="large"
+        type="submit"
+        class="mt-5"
+      >
+        Загрузить
+      </v-btn>
+    </v-form>
+  </v-card>
+</template>
+
+<script lang="ts" setup>
+import { usePlayerStore } from '@/stores/player/player.store';
+import { ref } from 'vue';
+import { fileToBase64Url } from '@/utils/file.utils';
+import { VForm } from 'vuetify/components';
+import {
+  requiredFileRules,
+  requiredTextRules,
+} from '@/constants/validation-rules.constants';
+
+const playerStore = usePlayerStore();
+
+const form = ref<VForm>();
+
+const loading = ref<boolean>(false);
+const name = ref<string>('');
+const author = ref<string>('');
+const covers = ref<File[]>([]);
+const audios = ref<File[]>([]);
+
+const validate = async (): Promise<boolean> => {
+  if (!form.value) {
+    return false;
+  }
+
+  const { valid } = await form.value.validate();
+
+  return valid;
+};
+
+const handleSubmit = async () => {
+  const noValid = !(await validate());
+  if (noValid) {
+    return;
+  }
+
+  const [coverFile] = covers.value;
+  const [audioFile] = audios.value;
+
+  playerStore.setup({
+    id: '1',
+    name: name.value,
+    author: author.value,
+    cover: await fileToBase64Url(coverFile),
+    fileName: audioFile.name,
+    format: audioFile.type,
+    url: await fileToBase64Url(audioFile),
+  });
+};
+</script>
