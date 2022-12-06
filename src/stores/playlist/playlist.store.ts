@@ -43,7 +43,7 @@ export const usePlaylistStore = defineStore(Stores.PLAYLIST, () => {
 
     const noTrack = !prevTrack;
     if (noTrack) {
-      return first();
+      return last();
     }
 
     currentTrackIndex.value = prevTrackIndex;
