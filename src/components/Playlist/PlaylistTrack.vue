@@ -1,5 +1,13 @@
 <template>
-  <div class="playlist-track"></div>
+  <v-list-item :title="name" :subtitle="author" :prepend-avatar="cover" />
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { AudioModel } from '@/models/audio.model';
+
+defineProps<{
+  name: AudioModel['name'];
+  author: AudioModel['author'];
+  cover: AudioModel['cover'];
+}>();
+</script>

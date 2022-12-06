@@ -6,9 +6,16 @@ import { PlaylistModel } from '@/models/playlist.model';
 
 export const useUserPlaylistStore = defineStore(Stores.USER_PLAYLIST, () => {
   const items = ref<PlaylistModel[]>([]);
+  const loading = ref<boolean>(false);
 
   const fetchAll = async () => {
-    items.value = await PlaylistService.fetchAll();
+    try {
+      loading.value = true;
+
+      items.value = await PlaylistService.fetchAll();
+    } finally {
+      loading.value = false;
+    }
   };
 
   const add = (playlist: PlaylistModel) => {

@@ -1,3 +1,4 @@
+import { createPlaylistMock } from '@/mocks/playlist.mock';
 import { PlaylistModel } from '@/models/playlist.model';
 
 class PlaylistService {
@@ -5,7 +6,11 @@ class PlaylistService {
     const playlistsRecord = localStorage.getItem('playlists');
     const playlists: PlaylistModel[] = playlistsRecord
       ? JSON.parse(playlistsRecord)
-      : [];
+      : [
+          createPlaylistMock('Плейлист 1'),
+          createPlaylistMock('Самое крутое'),
+          createPlaylistMock('Е**ть жара'),
+        ];
 
     return playlists;
   }
