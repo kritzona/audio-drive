@@ -51,11 +51,21 @@ import PlayerControlPanel from './PlayerControlPanel.vue';
 import ErrorAlert from '../Alerts/ErrorAlert.vue';
 import PlayerTrack from './PlayerTrack.vue';
 import PlayerTimeline from './PlayerTimeline.vue';
+import { usePlaylistStore } from '@/stores/playlist/playlist.store';
 
 const playerStore = usePlayerStore();
+const playlistStore = usePlaylistStore();
 
 onMounted(() => {
-  playerStore.setup(createAudioMp3Mock());
+  playlistStore.setup([
+    createAudioMp3Mock(),
+    createAudioMp3Mock(),
+    createAudioMp3Mock(),
+    createAudioMp3Mock(),
+  ]);
+
+  const firstTrack = playlistStore.first();
+  if (firstTrack) playerStore.setup(firstTrack);
 });
 
 const handlePlay = () => {
@@ -71,10 +81,12 @@ const handleStop = () => {
 };
 
 const handlePrev = () => {
-  // TODO: Нужен стор с плейлистом для реализации
+  const prevTrack = playlistStore.prev();
+  if (prevTrack) playerStore.setup(prevTrack, true);
 };
 
 const handleNext = () => {
-  // TODO: Нужен стор с плейлистом для реализации
+  const nextTrack = playlistStore.next();
+  if (nextTrack) playerStore.setup(nextTrack, true);
 };
 </script>

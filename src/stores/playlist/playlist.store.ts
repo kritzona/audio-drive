@@ -5,43 +5,74 @@ import { AudioModel } from '@/models/audio.model';
 
 export const usePlaylistStore = defineStore(Stores.PLAYLIST, () => {
   const name = ref<string | null>(null);
+
   const tracks = ref<AudioModel[]>([]);
   const currentTrackIndex = ref<number>(0);
 
-  const prev = (): AudioModel | null => {
+  const setup = (audios: AudioModel[]) => {
+    tracks.value = [...audios];
+  };
+
+  const first = (): AudioModel | null => {
     try {
-      const prevTrackIndex = currentTrackIndex.value - 1;
-      const prevTrack = tracks.value[prevTrackIndex];
+      const firstTrack = tracks.value[0];
 
-      currentTrackIndex.value = prevTrackIndex;
-
-      return prevTrack;
-    } catch {
       currentTrackIndex.value = 0;
 
+      return firstTrack;
+    } catch {
       return null;
     }
   };
 
-  const next = (): AudioModel | null => {
+  const last = (): AudioModel | null => {
     try {
-      const nextTrackIndex = currentTrackIndex.value + 1;
-      const nextTrack = tracks.value[nextTrackIndex];
+      const lastTrack = tracks.value[tracks.value.length - 1];
 
-      currentTrackIndex.value = nextTrackIndex;
+      currentTrackIndex.value = tracks.value.length - 1;
 
-      return nextTrack;
+      return lastTrack;
     } catch {
-      currentTrackIndex.value = 0;
-
       return null;
     }
+  };
+
+  const prev = (): AudioModel | null => {
+    const prevTrackIndex = currentTrackIndex.value - 1;
+    const prevTrack = tracks.value[prevTrackIndex];
+
+    const noTrack = !prevTrack;
+    if (noTrack) {
+      return first();
+    }
+
+    currentTrackIndex.value = prevTrackIndex;
+
+    return prevTrack;
+  };
+
+  const next = (): AudioModel | null => {
+    const nextTrackIndex = currentTrackIndex.value + 1;
+    const nextTrack = tracks.value[nextTrackIndex];
+
+    const noTrack = !nextTrack;
+    if (noTrack) {
+      return first();
+    }
+
+    currentTrackIndex.value = nextTrackIndex;
+
+    return nextTrack;
   };
 
   return {
     name,
     tracks,
+    currentTrackIndex,
 
+    setup,
+    first,
+    last,
     prev,
     next,
   };
