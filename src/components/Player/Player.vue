@@ -69,7 +69,7 @@ onMounted(() => {
 });
 
 const handlePlay = () => {
-  playerStore.play();
+  playerStore.play(() => handleNext());
 };
 
 const handlePause = () => {

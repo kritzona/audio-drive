@@ -26,39 +26,59 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
     }
   };
 
-  const play = async () => {
+  const setPlayed = () => {
+    playing.value = true;
+    stoped.value = false;
+  };
+
+  const play = async (onTrackEnd?: () => void) => {
     try {
       await audioService.play();
 
-      audioService.listenTimeChange(
-        (seconds) => (elapsedSeconds.value = seconds)
-      );
+      audioService.listenTimeChange((seconds) => setSecondsElapsed(seconds));
 
-      playing.value = true;
-      stoped.value = false;
+      audioService.listenTrackEnd(() => {
+        stop();
+
+        if (onTrackEnd) onTrackEnd();
+      });
+
+      setPlayed();
     } catch {
       hasError.value = true;
     }
   };
 
+  const setPaused = () => {
+    playing.value = false;
+    stoped.value = false;
+  };
+
   const pause = () => {
     audioService.pause();
 
+    setPaused();
+  };
+
+  const setStoped = () => {
     playing.value = false;
-    stoped.value = false;
+    stoped.value = true;
   };
 
   const stop = () => {
     audioService.stop();
 
-    playing.value = false;
-    stoped.value = true;
+    setStoped();
+  };
+
+  const setSecondsElapsed = (seconds: number) => {
+    elapsedSeconds.value = seconds;
   };
 
   const updateSecondsElapsed = (seconds: number) => {
     audioService.setCurrentTime(seconds);
 
-    elapsedSeconds.value = seconds;
+    setSecondsElapsed(seconds);
   };
 
   const reset = () => {
