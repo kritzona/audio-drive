@@ -20,10 +20,6 @@ class AudioService {
     return new Promise((resolve) => {
       this.element.src = audio.url;
 
-      this.element.addEventListener('ended', () => {
-        this.setCurrentTime(0);
-      });
-
       this.element.addEventListener('loadeddata', () => {
         resolve(true);
       });
@@ -60,6 +56,10 @@ class AudioService {
 
       callback(currentTime);
     });
+  }
+
+  listenTrackEnd(callback: () => void) {
+    this.element.addEventListener('ended', callback);
   }
 }
 
