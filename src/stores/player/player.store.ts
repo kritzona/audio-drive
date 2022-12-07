@@ -31,13 +31,17 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
     stoped.value = false;
   };
 
-  const play = async () => {
+  const play = async (onTrackEnd?: () => void) => {
     try {
       await audioService.play();
 
       audioService.listenTimeChange((seconds) => setSecondsElapsed(seconds));
 
-      audioService.listenTrackEnd(() => stop());
+      audioService.listenTrackEnd(() => {
+        stop();
+
+        if (onTrackEnd) onTrackEnd();
+      });
 
       setPlayed();
     } catch {
