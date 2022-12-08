@@ -1,7 +1,7 @@
 import { Stores } from '@/constants/stores.constants';
 import { AudioModel } from '@/models/audio.model';
 import { PlayerModel } from '@/models/player.model';
-import audioService from '@/services/audio.service';
+import AudioService from '@/services/audio.service';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -16,9 +16,9 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   const setup = (newAudio: AudioModel, playNow = false) => {
     reset();
 
-    audioService.change(newAudio, () => {
+    AudioService.change(newAudio, () => {
       audio.value = newAudio;
-      duration.value = audioService.duration;
+      duration.value = AudioService.duration;
 
       if (playNow) {
         play();
@@ -33,11 +33,11 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
 
   const play = async (onTrackEnd?: () => void) => {
     try {
-      await audioService.play();
+      await AudioService.play();
 
-      audioService.listenTimeChange((seconds) => setSecondsElapsed(seconds));
+      AudioService.listenTimeChange((seconds) => setSecondsElapsed(seconds));
 
-      audioService.listenTrackEnd(() => {
+      AudioService.listenTrackEnd(() => {
         stop();
 
         if (onTrackEnd) onTrackEnd();
@@ -55,7 +55,7 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   };
 
   const pause = () => {
-    audioService.pause();
+    AudioService.pause();
 
     setPaused();
   };
@@ -66,7 +66,7 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   };
 
   const stop = () => {
-    audioService.stop();
+    AudioService.stop();
 
     setStoped();
   };
@@ -76,7 +76,7 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   };
 
   const updateSecondsElapsed = (seconds: number) => {
-    audioService.setCurrentTime(seconds);
+    AudioService.setCurrentTime(seconds);
 
     setSecondsElapsed(seconds);
   };
