@@ -1,66 +1,66 @@
 import { Errors } from '@/constants/errors.constants';
 import { AudioModel } from '@/models/audio.model';
+import { ElementEventManager } from '@/utils/event.utils';
 
 class AudioService {
-  constructor() {
-    this.element = new Audio();
-  }
+  protected static readonly element = new Audio();
 
-  protected readonly element: HTMLAudioElement;
+  protected static readonly eventManager = new ElementEventManager(
+    this.element
+  );
 
-  protected get hasDefect() {
+  protected static get hasDefect() {
     return Boolean(this.element.HAVE_NOTHING || this.element.NETWORK_EMPTY);
   }
 
-  get duration() {
+  static get duration() {
     return Math.ceil(this.element.duration);
   }
 
-  change(audio: AudioModel) {
-    return new Promise((resolve) => {
-      this.element.src = audio.url;
+  static change(audio: AudioModel, onReady?: () => void) {
+    this.eventManager.clear();
 
-      this.element.addEventListener('loadeddata', () => {
-        resolve(true);
-      });
-    });
+    this.element.src = audio.url;
+
+    if (onReady) {
+      this.eventManager.add('loadeddata', onReady);
+    }
   }
 
-  play() {
-    return new Promise((resolve, reject) => {
-      if (this.hasDefect) {
-        reject(Errors.PLAY);
-      }
+  static async play() {
+    this.eventManager.clear();
 
-      resolve(this.element.play());
-    });
+    if (this.hasDefect) {
+      return Promise.reject(Errors.PLAY);
+    }
+
+    return this.element.play();
   }
 
-  pause() {
+  static pause() {
     this.element.pause();
   }
 
-  stop() {
-    this.element.currentTime = 0;
-
+  static stop() {
+    this.setCurrentTime(0);
     this.pause();
   }
 
-  setCurrentTime(seconds: number) {
+  static setCurrentTime(seconds: number) {
     this.element.currentTime = seconds;
   }
 
-  listenTimeChange(callback: (seconds: number) => void) {
-    this.element.addEventListener('timeupdate', () => {
+  static listenTimeChange(callback: (seconds: number) => void) {
+    this.eventManager.add('timeupdate', () => {
       const currentTime = Math.floor(this.element.currentTime);
 
       callback(currentTime);
     });
   }
 
-  listenTrackEnd(callback: () => void) {
-    this.element.addEventListener('ended', callback);
+  static listenTrackEnd(callback: () => void) {
+    this.eventManager.add('ended', callback);
   }
 }
 
-export default new AudioService();
+export default AudioService;

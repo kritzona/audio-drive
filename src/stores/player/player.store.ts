@@ -1,7 +1,7 @@
 import { Stores } from '@/constants/stores.constants';
 import { AudioModel } from '@/models/audio.model';
 import { PlayerModel } from '@/models/player.model';
-import audioService from '@/services/audio.service';
+import AudioService from '@/services/audio.service';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -13,17 +13,17 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   const hasError = ref<boolean>(false);
   const duration = ref<number>(0);
 
-  const setup = async (newAudio: AudioModel, playNow = false) => {
+  const setup = (newAudio: AudioModel, playNow = false) => {
     reset();
 
-    await audioService.change(newAudio);
-    audio.value = newAudio;
+    AudioService.change(newAudio, () => {
+      audio.value = newAudio;
+      duration.value = AudioService.duration;
 
-    duration.value = audioService.duration;
-
-    if (playNow) {
-      play();
-    }
+      if (playNow) {
+        play();
+      }
+    });
   };
 
   const setPlayed = () => {
@@ -33,11 +33,11 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
 
   const play = async (onTrackEnd?: () => void) => {
     try {
-      await audioService.play();
+      await AudioService.play();
 
-      audioService.listenTimeChange((seconds) => setSecondsElapsed(seconds));
+      AudioService.listenTimeChange((seconds) => setSecondsElapsed(seconds));
 
-      audioService.listenTrackEnd(() => {
+      AudioService.listenTrackEnd(() => {
         stop();
 
         if (onTrackEnd) onTrackEnd();
@@ -55,7 +55,7 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   };
 
   const pause = () => {
-    audioService.pause();
+    AudioService.pause();
 
     setPaused();
   };
@@ -66,7 +66,7 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   };
 
   const stop = () => {
-    audioService.stop();
+    AudioService.stop();
 
     setStoped();
   };
@@ -76,7 +76,7 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   };
 
   const updateSecondsElapsed = (seconds: number) => {
-    audioService.setCurrentTime(seconds);
+    AudioService.setCurrentTime(seconds);
 
     setSecondsElapsed(seconds);
   };
