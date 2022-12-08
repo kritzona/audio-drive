@@ -1,8 +1,13 @@
 import { Errors } from '@/constants/errors.constants';
 import { AudioModel } from '@/models/audio.model';
+import { ElementEventManager } from '@/utils/event.utils';
 
 class AudioService {
-  private static element: HTMLAudioElement = new Audio();
+  protected static readonly element = new Audio();
+
+  protected static readonly eventManager = new ElementEventManager(
+    this.element
+  );
 
   protected static get hasDefect() {
     return Boolean(this.element.HAVE_NOTHING || this.element.NETWORK_EMPTY);
@@ -13,14 +18,18 @@ class AudioService {
   }
 
   static change(audio: AudioModel, onReady?: () => void) {
+    this.eventManager.clear();
+
     this.element.src = audio.url;
 
     if (onReady) {
-      this.element.addEventListener('loadeddata', onReady);
+      this.eventManager.add('loadeddata', onReady);
     }
   }
 
   static async play() {
+    this.eventManager.clear();
+
     if (this.hasDefect) {
       return Promise.reject(Errors.PLAY);
     }
@@ -33,8 +42,7 @@ class AudioService {
   }
 
   static stop() {
-    this.element.currentTime = 0;
-
+    this.setCurrentTime(0);
     this.pause();
   }
 
@@ -43,7 +51,7 @@ class AudioService {
   }
 
   static listenTimeChange(callback: (seconds: number) => void) {
-    this.element.addEventListener('timeupdate', () => {
+    this.eventManager.add('timeupdate', () => {
       const currentTime = Math.floor(this.element.currentTime);
 
       callback(currentTime);
@@ -51,7 +59,7 @@ class AudioService {
   }
 
   static listenTrackEnd(callback: () => void) {
-    this.element.addEventListener('ended', callback);
+    this.eventManager.add('ended', callback);
   }
 }
 
