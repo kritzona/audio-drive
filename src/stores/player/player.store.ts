@@ -13,17 +13,17 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   const hasError = ref<boolean>(false);
   const duration = ref<number>(0);
 
-  const setup = async (newAudio: AudioModel, playNow = false) => {
+  const setup = (newAudio: AudioModel, playNow = false) => {
     reset();
 
-    await audioService.change(newAudio);
-    audio.value = newAudio;
+    audioService.change(newAudio, () => {
+      audio.value = newAudio;
+      duration.value = audioService.duration;
 
-    duration.value = audioService.duration;
-
-    if (playNow) {
-      play();
-    }
+      if (playNow) {
+        play();
+      }
+    });
   };
 
   const setPlayed = () => {

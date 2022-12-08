@@ -16,24 +16,20 @@ class AudioService {
     return Math.ceil(this.element.duration);
   }
 
-  change(audio: AudioModel) {
-    return new Promise((resolve) => {
-      this.element.src = audio.url;
+  change(audio: AudioModel, onReady?: () => void) {
+    this.element.src = audio.url;
 
-      this.element.addEventListener('loadeddata', () => {
-        resolve(true);
-      });
-    });
+    if (onReady) {
+      this.element.addEventListener('loadeddata', onReady);
+    }
   }
 
-  play() {
-    return new Promise((resolve, reject) => {
-      if (this.hasDefect) {
-        reject(Errors.PLAY);
-      }
+  async play() {
+    if (this.hasDefect) {
+      return Promise.reject(Errors.PLAY);
+    }
 
-      resolve(this.element.play());
-    });
+    return this.element.play();
   }
 
   pause() {
