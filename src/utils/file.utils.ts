@@ -1,3 +1,9 @@
+/**
+ * Конвертация файла в Blob
+ *
+ * @param file Файл
+ * @returns Blob
+ */
 export const fileToBlob = async (file: File): Promise<Blob> => {
   const blobParts = [new Uint8Array(await file.arrayBuffer())];
   const blobOptions: BlobPropertyBag = { type: file.type };
@@ -5,6 +11,13 @@ export const fileToBlob = async (file: File): Promise<Blob> => {
   return new Blob(blobParts, blobOptions);
 };
 
+/**
+ * Конвертация файла в base64-ссылку
+ *
+ * @param file Файл
+ * @returns Ссылка на файл, которая содержит тип
+ * и содержимое файла в виде base64-строки
+ */
 export const fileToBase64Url = async (file: File): Promise<string> => {
   const blob = await fileToBlob(file);
 
