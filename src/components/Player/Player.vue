@@ -50,17 +50,28 @@ import PlayerTrack from './PlayerTrack.vue';
 import PlayerTimeline from './PlayerTimeline.vue';
 import { usePlayer } from '@/composables/player.composable';
 
+/** Хранилище данных плеера */
 const player = usePlayer();
 
+/** Обработчик кнопки воспроизведения */
 const handlePlay = () => player.play();
 
+/** Обработчик кнопки паузы */
 const handlePause = () => player.pause();
 
+/** Обработчик кнопки полной остановки трека */
 const handleStop = () => player.stop();
 
+/** Обработчик кнопки переключения на предыдущий трек */
 const handlePrev = () => player.prev();
 
+/** Обработчик кнопки переключения на следующий трек */
 const handleNext = () => player.next();
 
+/**
+ * Обработчик проматывание трека
+ *
+ * @param seconds Секунда, до которой нужно проматать трек
+ */
 const handleTimelineChange = (seconds: number) => player.skipTo(seconds);
 </script>

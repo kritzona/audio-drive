@@ -27,10 +27,10 @@ import PlayButton from '../Buttons/PlayButton.vue';
 import PrevButton from '../Buttons/PrevButton.vue';
 import StopButton from '../Buttons/StopButton.vue';
 
-const props = defineProps({
-  playing: Boolean,
-  stoped: Boolean,
-});
+const props = defineProps<{
+  playing: boolean;
+  stoped: boolean;
+}>();
 
 defineEmits<{
   (e: 'play'): void;
@@ -40,10 +40,12 @@ defineEmits<{
   (e: 'next'): void;
 }>();
 
+/** Показывать ли кнопку воспроизведения */
 const visiblePlayButton = computed(() => {
   return !props.playing;
 });
 
+/** Показывать ли кнопку паузы */
 const visiblePauseButton = computed(() => {
   return props.playing && !props.stoped;
 });

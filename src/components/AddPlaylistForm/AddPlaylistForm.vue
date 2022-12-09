@@ -32,13 +32,24 @@ import { requiredTextRules } from '@/constants/validation-rules.constants';
 import { VForm } from 'vuetify/components';
 import { useUserPlaylistStore } from '@/stores/user-playlist/user-playlist.store';
 
+/** Хранилище списка плейлистов */
 const userPlaylistStore = useUserPlaylistStore();
 
+/** Ссылка на компонент формы <v-form> */
 const form = ref<VForm>();
 
+/** Состояние загрузки */
 const loading = ref<boolean>(false);
+
+/** Наименование плейлиста */
 const name = ref<string>('');
 
+/**
+ * Валидация формы
+ *
+ * @async
+ * @return Успешность валидации
+ */
 const validate = async (): Promise<boolean> => {
   if (!form.value) {
     return false;
@@ -49,6 +60,11 @@ const validate = async (): Promise<boolean> => {
   return valid;
 };
 
+/**
+ * Обработчик отправки формы
+ *
+ * @async
+ */
 const handleSubmit = async () => {
   const noValid = !(await validate());
   if (noValid) {

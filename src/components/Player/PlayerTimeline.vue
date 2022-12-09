@@ -41,23 +41,40 @@ const emit = defineEmits<{
   (e: 'change', ellapsedSeconds: number): void;
 }>();
 
+/** Текущая тема Vuetify */
 const theme = useTheme();
 
+/** Главный цвет */
 const primaryColor = computed(() => theme.current.value.colors.primary);
+/** Вторичный цвет */
 const secondaryColor = computed(() => theme.current.value.colors.secondary);
 
+/** Продолжительность трека в формате "минуты:секунды" */
 const formattedDuration = computed(() => secondsToTime(props.duration));
+/** Количество прошедших секунд трека в формате "минуты:секунды" */
 const formattedEllapsedSeconds = computed(() =>
   secondsToTime(props.ellapsedSeconds)
 );
 
+/** Состояние фокуса на слайдере */
 const focused = ref<boolean>(false);
 
-const handleChange = debounce((event: number) => {
-  emit('change', event);
+/**
+ * Обработчик проматывание трека обвернутый в debounce,
+ * который позволяет взять последние секунды при резком проматывании
+ *
+ * @param seconds Секунда, до которой нужно проматать трек
+ */
+const handleChange = debounce((seconds: number) => {
+  emit('change', seconds);
 
   focused.value = false;
 }, 30);
 
-const handleFocus = (event: boolean) => (focused.value = event);
+/**
+ * Обработчик фокусировки/расфокусировки на слайдер
+ *
+ * @param focus Состояние фокуса
+ */
+const handleFocus = (focus: boolean) => (focused.value = focus);
 </script>
