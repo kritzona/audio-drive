@@ -1,5 +1,10 @@
 import { AudioModel } from '@/models/audio.model';
 
+/**
+ * Формирование заглушки для трека
+ *
+ * @returns Созданный аудио-трек
+ */
 export const createAudioMp3Mock = (): AudioModel => ({
   id: '1',
   url: '/mock-audio/LanaDelRey_SummertimeSadness.mp3',

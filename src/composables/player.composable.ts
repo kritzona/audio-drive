@@ -5,14 +5,33 @@ import { usePlayerStore } from '@/stores/player/player.store';
 import { usePlaylistStore } from '@/stores/playlist/playlist.store';
 import { reactive, onBeforeMount, toRefs } from 'vue';
 
+/**
+ * Бизнес-логика для работы с плеером
+ *
+ * @returns Свойства и методы для работы с плеером
+ */
 export const usePlayer = () => {
+  /**
+   * Хранилище данных плеера
+   */
   const playerStore = usePlayerStore();
+
+  /**
+   * Хранилище данных текущего плейлиста
+   */
   const playlistStore = usePlaylistStore();
 
+  /**
+   * Свойства стейта из хранилища плеера,
+   * которые необходимы для компонентов
+   */
   const { audio, playing, stoped, duration, elapsedSeconds, hasError } = toRefs(
     playerStore.$state
   );
 
+  /**
+   * Инициализация плейлиста и плеера
+   */
   onBeforeMount(() => {
     playlistStore.setup([
       createAudioMp3Mock(),
@@ -25,6 +44,12 @@ export const usePlayer = () => {
     if (firstTrack) initTrack(firstTrack);
   });
 
+  /**
+   * Инициализация трека
+   *
+   * @param audio Аудио для инициализации
+   * @param playNow Флаг для воспроизведения сразу после инициализации
+   */
   const initTrack = (audio: AudioModel, playNow = false) => {
     AudioService.change(audio, () => {
       playerStore.setup(audio);
@@ -35,6 +60,11 @@ export const usePlayer = () => {
     });
   };
 
+  /**
+   * Воспроизведение трека
+   *
+   * @async
+   */
   const play = async () => {
     try {
       await AudioService.play();
@@ -51,26 +81,43 @@ export const usePlayer = () => {
     }
   };
 
+  /**
+   * Остановка трека на паузу
+   */
   const pause = () => {
     AudioService.pause();
     playerStore.setPaused();
   };
 
+  /**
+   * Полная остановка трека
+   */
   const stop = () => {
     AudioService.stop();
     playerStore.setStoped();
   };
 
+  /**
+   * Проматывание трека до указанной секунды
+   *
+   * @param seconds Секунда, до которой нужно проматать трек
+   */
   const skipTo = (seconds: number) => {
     AudioService.setCurrentTime(seconds);
     playerStore.setSecondsElapsed(seconds);
   };
 
+  /**
+   * Переключение на предыдущий трек
+   */
   const prev = () => {
     const prevTrack = playlistStore.prev();
     if (prevTrack) initTrack(prevTrack, true);
   };
 
+  /**
+   * Переключение на следующий трек
+   */
   const next = () => {
     const nextTrack = playlistStore.next();
     if (nextTrack) initTrack(nextTrack, true);

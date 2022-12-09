@@ -71,16 +71,43 @@ import {
   requiredTextRules,
 } from '@/constants/validation-rules.constants';
 
+/**
+ * Хранилище данных плеера
+ */
 const playerStore = usePlayerStore();
 
+/**
+ * Ссылка на компонент формы <v-form>
+ */
 const form = ref<VForm>();
 
+/**
+ * Состояние загрузки
+ */
 const loading = ref<boolean>(false);
+/**
+ * Название трека
+ */
 const name = ref<string>('');
+/**
+ * Автор трека
+ */
 const author = ref<string>('');
+/**
+ * Файл обложки
+ */
 const covers = ref<File[]>([]);
+/**
+ * Аудио-файл
+ */
 const audios = ref<File[]>([]);
 
+/**
+ * Валидация формы
+ *
+ * @async
+ * @return Успешность валидации
+ */
 const validate = async (): Promise<boolean> => {
   if (!form.value) {
     return false;
@@ -91,6 +118,11 @@ const validate = async (): Promise<boolean> => {
   return valid;
 };
 
+/**
+ * Обработчик отправки формы
+ *
+ * @async
+ */
 const handleSubmit = async () => {
   const noValid = !(await validate());
   if (noValid) {

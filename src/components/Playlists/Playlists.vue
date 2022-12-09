@@ -13,8 +13,10 @@ import { useUserPlaylistStore } from '@/stores/user-playlist/user-playlist.store
 import { onMounted } from 'vue';
 import Playlist from '@/components/Playlist/Playlist.vue';
 
+/** Хранилище списка плейлистов пользователя */
 const userPlaylistStore = useUserPlaylistStore();
 
+/** Загрузка плейлистов */
 onMounted(() => {
   userPlaylistStore.fetchAll();
 });

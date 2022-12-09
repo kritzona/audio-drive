@@ -1,7 +1,15 @@
 import { createPlaylistMock } from '@/mocks/playlist.mock';
 import { PlaylistModel } from '@/models/playlist.model';
 
+/**
+ * Сервис для работы с внешним API плейлиста
+ */
 class PlaylistService {
+  /**
+   * Загрузка всех плейлистов пользователя
+   *
+   * @returns Список плейлистов
+   */
   static async fetchAll(): Promise<PlaylistModel[]> {
     const playlistsRecord = localStorage.getItem('playlists');
     const playlists: PlaylistModel[] = playlistsRecord
@@ -15,6 +23,11 @@ class PlaylistService {
     return playlists;
   }
 
+  /**
+   * Сохранение плейлистов в LocalStorage
+   *
+   * @param playlists Список плейлистов
+   */
   static commit(playlists: PlaylistModel[]) {
     const playlistsRecord = JSON.stringify(playlists);
     localStorage.setItem('playlists', playlistsRecord);
