@@ -3,7 +3,7 @@ import { AudioModel } from '@/models/audio.model';
 import { PlayerModel } from '@/models/player.model';
 import AudioService from '@/services/audio.service';
 import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   const audio = ref<PlayerModel['audio']>(null);
