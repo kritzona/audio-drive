@@ -3,7 +3,7 @@ import { AudioModel } from '@/models/audio.model';
 import { PlayerModel } from '@/models/player.model';
 import AudioService from '@/services/audio.service';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   const audio = ref<PlayerModel['audio']>(null);
@@ -13,17 +13,11 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   const hasError = ref<boolean>(false);
   const duration = ref<number>(0);
 
-  const setup = (newAudio: AudioModel, playNow = false) => {
+  const setup = (newAudio: AudioModel) => {
     reset();
 
-    AudioService.change(newAudio, () => {
-      audio.value = newAudio;
-      duration.value = AudioService.duration;
-
-      if (playNow) {
-        play();
-      }
-    });
+    audio.value = newAudio;
+    duration.value = AudioService.duration;
   };
 
   const setPlayed = () => {
@@ -31,33 +25,9 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
     stoped.value = false;
   };
 
-  const play = async (onTrackEnd?: () => void) => {
-    try {
-      await AudioService.play();
-
-      AudioService.listenTimeChange((seconds) => setSecondsElapsed(seconds));
-
-      AudioService.listenTrackEnd(() => {
-        stop();
-
-        if (onTrackEnd) onTrackEnd();
-      });
-
-      setPlayed();
-    } catch {
-      hasError.value = true;
-    }
-  };
-
   const setPaused = () => {
     playing.value = false;
     stoped.value = false;
-  };
-
-  const pause = () => {
-    AudioService.pause();
-
-    setPaused();
   };
 
   const setStoped = () => {
@@ -65,20 +35,12 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
     stoped.value = true;
   };
 
-  const stop = () => {
-    AudioService.stop();
-
-    setStoped();
-  };
-
   const setSecondsElapsed = (seconds: number) => {
     elapsedSeconds.value = seconds;
   };
 
-  const updateSecondsElapsed = (seconds: number) => {
-    AudioService.setCurrentTime(seconds);
-
-    setSecondsElapsed(seconds);
+  const setError = () => {
+    hasError.value = true;
   };
 
   const reset = () => {
@@ -99,9 +61,10 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
     duration,
 
     setup,
-    play,
-    pause,
-    stop,
-    updateSecondsElapsed,
+    setPlayed,
+    setPaused,
+    setStoped,
+    setSecondsElapsed,
+    setError,
   };
 });
