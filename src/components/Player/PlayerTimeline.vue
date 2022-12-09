@@ -41,22 +41,34 @@ const emit = defineEmits<{
   (e: 'change', ellapsedSeconds: number): void;
 }>();
 
-/** Текущая тема Vuetify */
+/**
+ * Текущая тема Vuetify
+ */
 const theme = useTheme();
 
-/** Главный цвет */
+/**
+ * Главный цвет
+ */
 const primaryColor = computed(() => theme.current.value.colors.primary);
-/** Вторичный цвет */
+/**
+ * Вторичный цвет
+ */
 const secondaryColor = computed(() => theme.current.value.colors.secondary);
 
-/** Продолжительность трека в формате "минуты:секунды" */
+/**
+ * Продолжительность трека в формате "минуты:секунды"
+ */
 const formattedDuration = computed(() => secondsToTime(props.duration));
-/** Количество прошедших секунд трека в формате "минуты:секунды" */
+/**
+ * Количество прошедших секунд трека в формате "минуты:секунды"
+ */
 const formattedEllapsedSeconds = computed(() =>
   secondsToTime(props.ellapsedSeconds)
 );
 
-/** Состояние фокуса на слайдере */
+/**
+ * Состояние фокуса на слайдере
+ */
 const focused = ref<boolean>(false);
 
 /**

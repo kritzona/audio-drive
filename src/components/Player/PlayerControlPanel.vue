@@ -40,12 +40,16 @@ defineEmits<{
   (e: 'next'): void;
 }>();
 
-/** Показывать ли кнопку воспроизведения */
+/**
+ * Показывать ли кнопку воспроизведения
+ */
 const visiblePlayButton = computed(() => {
   return !props.playing;
 });
 
-/** Показывать ли кнопку паузы */
+/**
+ * Показывать ли кнопку паузы
+ */
 const visiblePauseButton = computed(() => {
   return props.playing && !props.stoped;
 });

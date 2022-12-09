@@ -71,21 +71,35 @@ import {
   requiredTextRules,
 } from '@/constants/validation-rules.constants';
 
-/** Хранилище данных плеера */
+/**
+ * Хранилище данных плеера
+ */
 const playerStore = usePlayerStore();
 
-/** Ссылка на компонент формы <v-form> */
+/**
+ * Ссылка на компонент формы <v-form>
+ */
 const form = ref<VForm>();
 
-/** Состояние загрузки */
+/**
+ * Состояние загрузки
+ */
 const loading = ref<boolean>(false);
-/** Название трека */
+/**
+ * Название трека
+ */
 const name = ref<string>('');
-/** Автор трека */
+/**
+ * Автор трека
+ */
 const author = ref<string>('');
-/** Файл обложки */
+/**
+ * Файл обложки
+ */
 const covers = ref<File[]>([]);
-/** Аудио-файл */
+/**
+ * Аудио-файл
+ */
 const audios = ref<File[]>([]);
 
 /**

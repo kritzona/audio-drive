@@ -32,16 +32,24 @@ import { requiredTextRules } from '@/constants/validation-rules.constants';
 import { VForm } from 'vuetify/components';
 import { useUserPlaylistStore } from '@/stores/user-playlist/user-playlist.store';
 
-/** Хранилище списка плейлистов */
+/**
+ * Хранилище списка плейлистов
+ */
 const userPlaylistStore = useUserPlaylistStore();
 
-/** Ссылка на компонент формы <v-form> */
+/**
+ * Ссылка на компонент формы <v-form>
+ */
 const form = ref<VForm>();
 
-/** Состояние загрузки */
+/**
+ * Состояние загрузки
+ */
 const loading = ref<boolean>(false);
 
-/** Наименование плейлиста */
+/**
+ * Наименование плейлиста
+ */
 const name = ref<string>('');
 
 /**
