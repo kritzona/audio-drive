@@ -3,17 +3,17 @@
     <v-row justify="space-between" align-content="center">
       <v-col align-self="center">
         <PlayerTrack
-          v-if="playerStore.audio"
-          :cover="playerStore.audio.cover"
-          :author="playerStore.audio.author"
-          :name="playerStore.audio.name"
+          v-if="player.audio"
+          :cover="player.audio.cover"
+          :author="player.audio.author"
+          :name="player.audio.name"
         />
       </v-col>
 
       <v-col align-self="center" class="d-flex flex-row justify-end">
         <PlayerControlPanel
-          :playing="playerStore.playing"
-          :stoped="playerStore.stoped"
+          :playing="player.playing"
+          :stoped="player.stoped"
           @play="handlePlay"
           @pause="handlePause"
           @stop="handleStop"
@@ -26,16 +26,16 @@
     <v-row>
       <v-col>
         <PlayerTimeline
-          v-if="playerStore.audio"
-          :duration="playerStore.duration"
-          :ellapsed-seconds="playerStore.elapsedSeconds"
-          @change="(seconds) => playerStore.updateSecondsElapsed(seconds)"
+          v-if="player.audio"
+          :duration="player.duration"
+          :ellapsed-seconds="player.elapsedSeconds"
+          @change="handleTimelineChange"
         />
       </v-col>
     </v-row>
 
     <v-row>
-      <ErrorAlert v-if="playerStore.hasError">
+      <ErrorAlert v-if="player.hasError">
         {{ Errors.PLAY }}
       </ErrorAlert>
     </v-row>
@@ -43,50 +43,24 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue';
-import { createAudioMp3Mock } from '@/mocks/audio-mp3.mock';
-import { usePlayerStore } from '@/stores/player/player.store';
 import { Errors } from '@/constants/errors.constants';
 import PlayerControlPanel from './PlayerControlPanel.vue';
 import ErrorAlert from '../Alerts/ErrorAlert.vue';
 import PlayerTrack from './PlayerTrack.vue';
 import PlayerTimeline from './PlayerTimeline.vue';
-import { usePlaylistStore } from '@/stores/playlist/playlist.store';
+import { usePlayer } from '@/composables/player.composable';
 
-const playerStore = usePlayerStore();
-const playlistStore = usePlaylistStore();
+const player = usePlayer();
 
-onMounted(() => {
-  playlistStore.setup([
-    createAudioMp3Mock(),
-    createAudioMp3Mock(),
-    createAudioMp3Mock(),
-    createAudioMp3Mock(),
-  ]);
+const handlePlay = () => player.play();
 
-  const firstTrack = playlistStore.first();
-  if (firstTrack) playerStore.setup(firstTrack);
-});
+const handlePause = () => player.pause();
 
-const handlePlay = () => {
-  playerStore.play(() => handleNext());
-};
+const handleStop = () => player.stop();
 
-const handlePause = () => {
-  playerStore.pause();
-};
+const handlePrev = () => player.prev();
 
-const handleStop = () => {
-  playerStore.stop();
-};
+const handleNext = () => player.next();
 
-const handlePrev = () => {
-  const prevTrack = playlistStore.prev();
-  if (prevTrack) playerStore.setup(prevTrack, true);
-};
-
-const handleNext = () => {
-  const nextTrack = playlistStore.next();
-  if (nextTrack) playerStore.setup(nextTrack, true);
-};
+const handleTimelineChange = (seconds: number) => player.skipTo(seconds);
 </script>
