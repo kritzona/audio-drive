@@ -8,7 +8,6 @@ import { ref } from 'vue';
 /**
  * Хранилище данных для плеера
  *
- * @function usePlayerStore
  * @return {object} Публичные методы и свойства для работы с хранилищем
  */
 export const usePlayerStore = defineStore(Stores.PLAYER, () => {
