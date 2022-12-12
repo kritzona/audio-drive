@@ -1,64 +1,62 @@
 <template>
-  <v-card class="mx-auto px-6 py-8" max-width="344">
-    <v-form ref="form" class="upload-audio-form" @submit.prevent="handleSubmit">
-      <v-text-field
-        v-model="name"
-        :readonly="loading"
-        :rules="requiredTextRules"
-        clearable
-        hide-details="auto"
-        label="Название"
-        color="primary"
-        required
-      />
+  <v-form ref="form" class="upload-audio-form" @submit.prevent="handleSubmit">
+    <v-text-field
+      v-model="name"
+      :readonly="loading"
+      :rules="requiredTextRules"
+      clearable
+      hide-details="auto"
+      label="Название"
+      color="primary"
+      required
+    />
 
-      <v-text-field
-        v-model="author"
-        :readonly="loading"
-        :rules="requiredTextRules"
-        clearable
-        hide-details="auto"
-        label="Исполнитель"
-        class="mt-5"
-        color="primary"
-        required
-      />
+    <v-text-field
+      v-model="author"
+      :readonly="loading"
+      :rules="requiredTextRules"
+      clearable
+      hide-details="auto"
+      label="Исполнитель"
+      class="mt-5"
+      color="primary"
+      required
+    />
 
-      <v-file-input
-        v-model="covers"
-        :readonly="loading"
-        :rules="requiredFileRules"
-        accept="image/png, image/jpeg, image/bmp"
-        label="Обложка"
-        color="primary"
-        prepend-icon="mdi-camera"
-        show-size
-        class="mt-5"
-      />
+    <v-file-input
+      v-model="covers"
+      :readonly="loading"
+      :rules="requiredFileRules"
+      accept="image/png, image/jpeg, image/bmp"
+      label="Обложка"
+      color="primary"
+      prepend-icon="mdi-camera"
+      show-size
+      class="mt-5"
+    />
 
-      <v-file-input
-        v-model="audios"
-        :readonly="loading"
-        :rules="requiredFileRules"
-        accept="audio/mpeg"
-        label="Аудио-трек"
-        color="primary"
-        prepend-icon="mdi-music"
-        show-size
-      />
+    <v-file-input
+      v-model="audios"
+      :readonly="loading"
+      :rules="requiredFileRules"
+      accept="audio/mpeg"
+      label="Аудио-трек"
+      color="primary"
+      prepend-icon="mdi-music"
+      show-size
+    />
 
-      <v-btn
-        :loading="loading"
-        block
-        color="primary"
-        size="large"
-        type="submit"
-        class="mt-5"
-      >
-        Загрузить
-      </v-btn>
-    </v-form>
-  </v-card>
+    <v-btn
+      :loading="loading"
+      block
+      color="primary"
+      size="large"
+      type="submit"
+      class="mt-5"
+    >
+      Загрузить
+    </v-btn>
+  </v-form>
 </template>
 
 <script lang="ts" setup>
