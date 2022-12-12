@@ -7,12 +7,20 @@
     </v-navigation-drawer>
 
     <v-navigation-drawer location="right" permanent>
-      Плейлист
+      Место для плейлиста
     </v-navigation-drawer>
 
     <v-main scrollable>
-      <v-card width="600" class="mx-auto my-10" :elevation="0">
-        <template #title><h1 class="text-h3 mb-10">Страница</h1></template>
+      <v-card class="mx-10 my-10" :elevation="0">
+        <template #title>
+          <div class="d-flex flex-row align-center mb-10">
+            <v-icon v-if="pageIcon" large left class="mr-5">
+              {{ pageIcon }}
+            </v-icon>
+
+            <span class="text-h4">{{ pageTitle }}</span>
+          </div>
+        </template>
 
         <template #text>
           <slot></slot>
@@ -29,6 +37,13 @@
 <script lang="ts" setup>
 import Player from '@/components/Player/Player.vue';
 import DashboardNavigation from '@/components/Layouts/Dashboard/DashboardNavigation.vue';
+import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+
+const route = useRoute();
+
+const pageTitle = computed(() => route.meta?.title ?? 'Заголовок');
+const pageIcon = computed(() => route.meta?.icon);
 </script>
 
 <style lang="scss">

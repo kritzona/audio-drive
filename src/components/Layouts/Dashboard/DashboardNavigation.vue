@@ -15,9 +15,11 @@
     <v-list-item
       prepend-icon="mdi-upload"
       title="Загрузить аудио-трек"
-      value="upload-track-page"
+      :to="Routes.UPLOAD_AUDIO_TRACK_PAGE"
     />
   </v-list>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { Routes } from '@/constants/routes.constants';
+</script>
