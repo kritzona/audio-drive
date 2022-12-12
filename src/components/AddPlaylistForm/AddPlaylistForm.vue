@@ -31,6 +31,7 @@ import { ref } from 'vue';
 import { requiredTextRules } from '@/constants/validation-rules.constants';
 import { VForm } from 'vuetify/components';
 import { useUserPlaylistStore } from '@/stores/user-playlist/user-playlist.store';
+import { useForm } from '@/composables/form.composable';
 
 /**
  * Хранилище списка плейлистов
@@ -38,14 +39,9 @@ import { useUserPlaylistStore } from '@/stores/user-playlist/user-playlist.store
 const userPlaylistStore = useUserPlaylistStore();
 
 /**
- * Ссылка на компонент формы <v-form>
+ * Бизнес-логика для работы с формой
  */
-const form = ref<VForm>();
-
-/**
- * Состояние загрузки
- */
-const loading = ref<boolean>(false);
+const { form, loading, validate } = useForm();
 
 /**
  * Наименование плейлиста
@@ -53,31 +49,10 @@ const loading = ref<boolean>(false);
 const name = ref<string>('');
 
 /**
- * Валидация формы
- *
- * @async
- * @return Успешность валидации
- */
-const validate = async (): Promise<boolean> => {
-  if (!form.value) {
-    return false;
-  }
-
-  const { valid } = await form.value.validate();
-
-  return valid;
-};
-
-/**
  * Обработчик отправки формы
- *
- * @async
  */
 const handleSubmit = async () => {
-  const noValid = !(await validate());
-  if (noValid) {
-    return;
-  }
+  await validate();
 
   userPlaylistStore.add({
     id: '1',
