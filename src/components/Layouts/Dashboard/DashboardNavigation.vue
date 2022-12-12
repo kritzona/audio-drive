@@ -3,7 +3,7 @@
     <v-list-item
       prepend-icon="mdi-playlist-music"
       title="Все плейлисты"
-      value="all-playlist-page"
+      :to="Routes.ALL_PLAYLIST_PAGE"
     />
 
     <v-list-item

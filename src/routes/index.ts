@@ -16,6 +16,15 @@ const routes: RouteRecordRaw[] = [
       icon: 'mdi-upload',
     },
   },
+  {
+    path: `/${Routes.ALL_PLAYLIST_PAGE}`,
+    name: Routes.ALL_PLAYLIST_PAGE,
+    component: import('@/pages/main/AllPlaylistPage.vue'),
+    meta: {
+      title: 'Все плейлисты',
+      icon: 'mdi-playlist-music',
+    },
+  },
 ];
 
 export default routes;

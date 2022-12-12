@@ -1,7 +1,11 @@
 <template>
   <v-container class="playlists">
     <v-row>
-      <v-col v-for="playlist in userPlaylistStore.items" :key="playlist.id">
+      <v-col
+        v-for="playlist in userPlaylistStore.items"
+        :key="playlist.id"
+        :lg="4"
+      >
         <Playlist :name="playlist.name" :tracks="playlist.tracks" />
       </v-col>
     </v-row>
