@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useUserPlaylistStore } from '@/stores/user-playlist/user-playlist.store';
+import { useUserPlaylistStore } from '@/app/stores/user-playlist/user-playlist.store';
 import { onMounted } from 'vue';
 import Playlist from '@/components/Playlist/Playlist.vue';
 

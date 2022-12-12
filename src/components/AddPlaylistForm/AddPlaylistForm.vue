@@ -28,7 +28,7 @@
 import { ref } from 'vue';
 import { requiredTextRules } from '@/constants/validation-rules.constants';
 import { VForm } from 'vuetify/components';
-import { useUserPlaylistStore } from '@/stores/user-playlist/user-playlist.store';
+import { useUserPlaylistStore } from '@/app/stores/user-playlist/user-playlist.store';
 import { useForm } from '@/composables/form.composable';
 
 /**

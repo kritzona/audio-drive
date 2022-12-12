@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts" setup>
-import { usePlayerStore } from '@/stores/player/player.store';
+import { usePlayerStore } from '@/app/stores/player/player.store';
 import { ref } from 'vue';
 import { fileToBase64Url } from '@/utils/file.utils';
 import { VForm } from 'vuetify/components';
