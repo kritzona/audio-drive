@@ -1,10 +1,7 @@
 <template>
-  <DashboardLayout class="main-page">
-    <UploadAudioForm />
-  </DashboardLayout>
+  <DashboardLayout class="main-page" />
 </template>
 
 <script lang="ts" setup>
-import UploadAudioForm from '@/components/UploadAudioForm/UploadAudioForm.vue';
 import DashboardLayout from '@/components/Layouts/Dashboard/DashboardLayout.vue';
 </script>

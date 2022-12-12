@@ -6,6 +6,9 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: Routes.MAIN_PAGE,
     component: import('@/pages/main/MainPage.vue'),
+    beforeEnter: (_to, _from, next) => {
+      next({ name: Routes.ALL_PLAYLIST_PAGE });
+    },
   },
   {
     path: `/${Routes.UPLOAD_AUDIO_TRACK_PAGE}`,
