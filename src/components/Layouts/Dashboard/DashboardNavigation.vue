@@ -9,7 +9,7 @@
     <v-list-item
       prepend-icon="mdi-playlist-plus"
       title="Добавить новый плейлист"
-      value="add-playlist-page"
+      :to="Routes.ADD_PLAYLIST_PAGE"
     />
 
     <v-list-item
