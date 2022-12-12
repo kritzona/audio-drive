@@ -3,7 +3,7 @@
     <v-app-bar color="primary" density="compact"></v-app-bar>
 
     <v-navigation-drawer permanent expand-on-hover rail>
-      Меню
+      <DashboardNavigation />
     </v-navigation-drawer>
 
     <v-navigation-drawer location="right" permanent>
@@ -20,12 +20,7 @@
       </v-card>
     </v-main>
 
-    <v-footer
-      :app="true"
-      :absolute="true"
-      border
-      class="dashboard-layout__footer"
-    >
+    <v-footer app absolute border class="dashboard-layout__footer">
       <Player />
     </v-footer>
   </v-app>
@@ -33,6 +28,7 @@
 
 <script lang="ts" setup>
 import Player from '@/components/Player/Player.vue';
+import DashboardNavigation from '@/components/Layouts/Dashboard/DashboardNavigation.vue';
 </script>
 
 <style lang="scss">
