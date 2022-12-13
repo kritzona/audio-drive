@@ -48,7 +48,7 @@ import PlayerControlPanel from './PlayerControlPanel.vue';
 import SharedUI from '@/shared/ui';
 import PlayerTrack from './PlayerTrack.vue';
 import PlayerTimeline from './PlayerTimeline.vue';
-import { usePlayer } from '@/composables/player.composable';
+import { usePlayer } from '@/widgets/player';
 
 /**
  * Хранилище данных плеера
