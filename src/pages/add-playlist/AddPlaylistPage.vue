@@ -8,5 +8,5 @@
 
 <script lang="ts" setup>
 import DashboardLayout from '@/components/Layouts/Dashboard/DashboardLayout.vue';
-import AddPlaylistForm from '@/components/AddPlaylistForm/AddPlaylistForm.vue';
+import { AddPlaylistForm } from '@/widgets/add-playlist-form';
 </script>

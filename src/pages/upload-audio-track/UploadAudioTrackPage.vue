@@ -8,5 +8,5 @@
 
 <script lang="ts" setup>
 import DashboardLayout from '@/components/Layouts/Dashboard/DashboardLayout.vue';
-import UploadAudioForm from '@/components/UploadAudioForm/UploadAudioForm.vue';
+import { UploadAudioForm } from '@/widgets/upload-audio-form';
 </script>
