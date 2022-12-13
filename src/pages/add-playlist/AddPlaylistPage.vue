@@ -7,6 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-import DashboardLayout from '@/components/Layouts/Dashboard/DashboardLayout.vue';
-import AddPlaylistForm from '@/components/AddPlaylistForm/AddPlaylistForm.vue';
+import { DashboardLayout } from '@/app/layouts';
+import { AddPlaylistForm } from '@/features/add-playlist-form';
 </script>
