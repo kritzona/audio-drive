@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { PlaylistModel } from '@/models/playlist.model';
+import { PlaylistModel } from '@/entities/playlist/model/playlist.model';
 import PlaylistTrack from './PlaylistTrack.vue';
 
 defineProps<{

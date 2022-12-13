@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { Stores } from '@/constants/stores.constants';
 import { ref } from 'vue';
-import { AudioModel } from '@/models/audio.model';
+import { AudioModel } from '@/entities/audio/model/audio.model';
 
 /**
  * Хранилище данных для выбранного плейлиста

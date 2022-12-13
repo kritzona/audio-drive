@@ -1,7 +1,6 @@
 import { Stores } from '@/constants/stores.constants';
-import { AudioModel } from '@/models/audio.model';
-import { PlayerModel } from '@/models/player.model';
-import AudioService from '@/services/audio.service';
+import { AudioModel } from '@/entities/audio/model/audio.model';
+import AudioService from '@/entities/audio/lib/audio.service';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -14,7 +13,7 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   /**
    * Информация об аудио
    */
-  const audio = ref<PlayerModel['audio']>(null);
+  const audio = ref<AudioModel | null>(null);
 
   /**
    * Состояние воспроизведения

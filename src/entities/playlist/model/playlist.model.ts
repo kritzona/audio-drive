@@ -1,4 +1,4 @@
-import { AudioModel } from './audio.model';
+import { AudioModel } from '../../audio/model/audio.model';
 
 /**
  * Описание модели плейлиста

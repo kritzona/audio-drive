@@ -1,4 +1,4 @@
-import { AudioModel } from '@/models/audio.model';
+import { AudioModel } from '@/entities/audio/model/audio.model';
 
 /**
  * Формирование заглушки для трека
