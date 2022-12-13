@@ -1,6 +1,6 @@
 import { Errors } from '@/constants/errors.constants';
 import { AudioModel } from '@/entities/audio';
-import { ElementEventManager } from '@/utils/event.utils';
+import { ElementEventManager } from '@/shared/lib';
 
 /**
  * Сервис для работы с Audio API

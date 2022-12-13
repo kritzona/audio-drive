@@ -30,7 +30,7 @@
 import { computed, ref } from 'vue';
 import { useTheme } from 'vuetify/lib/framework.mjs';
 import { debounce } from 'lodash';
-import { secondsToTime } from '@/utils/time.utils';
+import { secondsToTime } from '@/shared/lib';
 
 const props = defineProps<{
   duration: number;
