@@ -1,7 +1,7 @@
 import { createAudioMp3Mock } from '@/entities/audio';
 import { AudioModel, AudioService } from '@/entities/audio';
 import { usePlayerStore } from './player.store';
-import { usePlaylistStore } from '@/widgets/playlist';
+import { usePlaylistStore } from '@/entities/playlist';
 import { reactive, onBeforeMount, toRefs } from 'vue';
 
 /**

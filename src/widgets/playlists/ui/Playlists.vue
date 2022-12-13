@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 import { useUserPlaylistStore } from '@/widgets/playlists';
 import { onMounted } from 'vue';
-import { Playlist } from '@/widgets/playlist';
+import { Playlist } from '@/entities/playlist';
 
 /** Хранилище списка плейлистов пользователя */
 const userPlaylistStore = useUserPlaylistStore();
