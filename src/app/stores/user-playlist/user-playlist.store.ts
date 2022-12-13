@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia';
 import { Stores } from '@/constants/stores.constants';
 import { ref } from 'vue';
-import PlaylistService from '@/entities/playlist/lib/playlist.service';
-import { PlaylistModel } from '@/entities/playlist/model/playlist.model';
+import { PlaylistModel, PlaylistService } from '@/entities/playlist';
 
 /**
  * Хранилище для списка всех плейлистов текущего пользователя

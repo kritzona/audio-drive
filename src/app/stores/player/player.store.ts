@@ -1,6 +1,5 @@
 import { Stores } from '@/constants/stores.constants';
-import { AudioModel } from '@/entities/audio/model/audio.model';
-import AudioService from '@/entities/audio/lib/audio.service';
+import { AudioModel, AudioService } from '@/entities/audio';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 

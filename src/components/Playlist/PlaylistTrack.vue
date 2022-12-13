@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { AudioModel } from '@/entities/audio/model/audio.model';
+import { AudioModel } from '@/entities/audio';
 
 defineProps<{
   name: AudioModel['name'];

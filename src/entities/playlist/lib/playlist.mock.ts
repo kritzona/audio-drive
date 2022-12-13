@@ -1,5 +1,5 @@
-import { PlaylistModel } from '@/entities/playlist/model/playlist.model';
-import { createAudioMp3Mock } from '../../audio/lib/audio-mp3.mock';
+import { PlaylistModel } from '../model/playlist.model';
+import { createAudioMp3Mock } from '@/entities/audio';
 
 /**
  * Формирование заглушки для плейлиста

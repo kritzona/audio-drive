@@ -1,5 +1,5 @@
-import { createPlaylistMock } from '@/entities/playlist/lib/playlist.mock';
-import { PlaylistModel } from '@/entities/playlist/model/playlist.model';
+import { createPlaylistMock } from './playlist.mock';
+import { PlaylistModel } from '../model/playlist.model';
 
 /**
  * Сервис для работы с внешним API плейлиста
