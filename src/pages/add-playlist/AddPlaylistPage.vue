@@ -8,5 +8,5 @@
 
 <script lang="ts" setup>
 import { DashboardLayout } from '@/app/layouts';
-import { AddPlaylistForm } from '@/widgets/add-playlist-form';
+import { AddPlaylistForm } from '@/features/add-playlist-form';
 </script>

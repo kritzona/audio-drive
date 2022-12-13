@@ -8,5 +8,5 @@
 
 <script lang="ts" setup>
 import { DashboardLayout } from '@/app/layouts';
-import { UploadAudioForm } from '@/widgets/upload-audio-form';
+import { UploadAudioForm } from '@/features/upload-audio-form';
 </script>
