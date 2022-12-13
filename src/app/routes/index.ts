@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-import { Routes } from '@/constants/routes.constants';
+import { Routes } from '@/shared/constants';
 
 const routes: RouteRecordRaw[] = [
   {

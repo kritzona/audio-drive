@@ -1,4 +1,4 @@
-import { Errors } from '@/constants/errors.constants';
+import { Errors } from '@/shared/constants';
 import { AudioModel } from '@/entities/audio';
 import { ElementEventManager } from '@/shared/lib';
 

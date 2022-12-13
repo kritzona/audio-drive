@@ -1,4 +1,4 @@
-import { Stores } from '@/constants/stores.constants';
+import { Stores } from '@/shared/constants';
 import { AudioModel, AudioService } from '@/entities/audio';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';

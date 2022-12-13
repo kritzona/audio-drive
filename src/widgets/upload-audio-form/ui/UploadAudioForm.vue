@@ -64,11 +64,8 @@ import { usePlayerStore } from '@/widgets/player';
 import { ref } from 'vue';
 import { fileToBase64Url } from '@/shared/lib';
 import { VForm } from 'vuetify/components';
-import {
-  requiredFileRules,
-  requiredTextRules,
-} from '@/constants/validation-rules.constants';
-import { useForm } from '@/composables/form.composable';
+import { requiredFileRules, requiredTextRules } from '@/shared/constants';
+import { useForm } from '@/shared/model';
 
 /**
  * Хранилище данных плеера

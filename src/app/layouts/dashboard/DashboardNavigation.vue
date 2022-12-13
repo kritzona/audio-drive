@@ -21,5 +21,5 @@
 </template>
 
 <script lang="ts" setup>
-import { Routes } from '@/constants/routes.constants';
+import { Routes } from '@/shared/constants/routes.constants';
 </script>

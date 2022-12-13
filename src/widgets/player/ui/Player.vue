@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Errors } from '@/constants/errors.constants';
+import { Errors } from '@/shared/constants';
 import PlayerControlPanel from './PlayerControlPanel.vue';
 import SharedUI from '@/shared/ui';
 import PlayerTrack from './PlayerTrack.vue';

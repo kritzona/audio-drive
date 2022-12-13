@@ -26,10 +26,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { requiredTextRules } from '@/constants/validation-rules.constants';
+import { requiredTextRules } from '@/shared/constants';
 import { VForm } from 'vuetify/components';
 import { useUserPlaylistStore } from '@/widgets/playlists';
-import { useForm } from '@/composables/form.composable';
+import { useForm } from '@/shared/model';
 
 /**
  * Хранилище списка плейлистов

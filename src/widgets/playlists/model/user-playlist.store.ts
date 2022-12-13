@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { Stores } from '@/constants/stores.constants';
+import { Stores } from '@/shared/constants';
 import { ref } from 'vue';
 import { PlaylistModel, PlaylistService } from '@/entities/playlist';
 
