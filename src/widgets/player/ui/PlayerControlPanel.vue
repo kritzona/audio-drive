@@ -1,31 +1,27 @@
 <template>
   <div class="d-flex flex-row player-control-panel">
-    <PrevButton @click="() => $emit('prev')" />
+    <SharedUI.PrevButton @click="() => $emit('prev')" />
 
-    <PlayButton
+    <SharedUI.PlayButton
       v-if="visiblePlayButton"
       class="ml-5"
       @click="() => $emit('play')"
     />
-    <PauseButton
+    <SharedUI.PauseButton
       v-else-if="visiblePauseButton"
       class="ml-5"
       @click="() => $emit('pause')"
     />
 
-    <StopButton class="ml-2" @click="() => $emit('stop')" />
+    <SharedUI.StopButton class="ml-2" @click="() => $emit('stop')" />
 
-    <NextButton class="ml-1" @click="() => $emit('next')" />
+    <SharedUI.NextButton class="ml-1" @click="() => $emit('next')" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import NextButton from '../Buttons/NextButton.vue';
-import PauseButton from '../Buttons/PauseButton.vue';
-import PlayButton from '../Buttons/PlayButton.vue';
-import PrevButton from '../Buttons/PrevButton.vue';
-import StopButton from '../Buttons/StopButton.vue';
+import SharedUI from '@/shared/ui';
 
 const props = defineProps<{
   playing: boolean;

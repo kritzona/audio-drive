@@ -35,9 +35,9 @@
     </v-row>
 
     <v-row>
-      <ErrorAlert v-if="player.hasError">
+      <SharedUI.ErrorAlert v-if="player.hasError">
         {{ Errors.PLAY }}
-      </ErrorAlert>
+      </SharedUI.ErrorAlert>
     </v-row>
   </v-container>
 </template>
@@ -45,7 +45,7 @@
 <script lang="ts" setup>
 import { Errors } from '@/constants/errors.constants';
 import PlayerControlPanel from './PlayerControlPanel.vue';
-import ErrorAlert from '../Alerts/ErrorAlert.vue';
+import SharedUI from '@/shared/ui';
 import PlayerTrack from './PlayerTrack.vue';
 import PlayerTimeline from './PlayerTimeline.vue';
 import { usePlayer } from '@/composables/player.composable';
