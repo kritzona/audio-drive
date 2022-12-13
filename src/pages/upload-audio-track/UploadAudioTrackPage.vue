@@ -7,6 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-import DashboardLayout from '@/components/Layouts/Dashboard/DashboardLayout.vue';
+import { DashboardLayout } from '@/app/layouts';
 import { UploadAudioForm } from '@/widgets/upload-audio-form';
 </script>

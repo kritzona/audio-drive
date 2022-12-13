@@ -36,7 +36,7 @@
 
 <script lang="ts" setup>
 import { Player } from '@/widgets/player';
-import DashboardNavigation from '@/components/Layouts/Dashboard/DashboardNavigation.vue';
+import DashboardNavigation from '@/app/layouts/dashboard/DashboardNavigation.vue';
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
 

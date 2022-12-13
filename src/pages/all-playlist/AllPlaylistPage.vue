@@ -5,6 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import DashboardLayout from '@/components/Layouts/Dashboard/DashboardLayout.vue';
+import { DashboardLayout } from '@/app/layouts';
 import { Playlists } from '@/widgets/playlists';
 </script>

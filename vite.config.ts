@@ -11,7 +11,7 @@ export default defineConfig({
     eslint(),
     vuetify({
       styles: {
-        configFile: './src/assets/styles/settings.scss',
+        configFile: './src/app/assets/styles/settings.scss',
       },
     }),
   ],
