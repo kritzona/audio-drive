@@ -10,6 +10,9 @@ export default defineConfig({
     deps: {
       inline: ['vuetify'],
     },
+    coverage: {
+      provider: 'c8',
+    },
   },
 
   root: './',
