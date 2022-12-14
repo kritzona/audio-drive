@@ -26,7 +26,7 @@ exports[`AddPlaylistForm.vue > render 1`] = `
           </label><label class=\\"v-label v-field-label\\" for=\\"input-0\\">
             <!---->Название плейлиста
           </label>
-          <!----><input size=\\"1\\" type=\\"text\\" id=\\"input-0\\" required=\\"\\" class=\\"v-field__input\\">
+          <!----><input name=\\"name\\" size=\\"1\\" type=\\"text\\" id=\\"input-0\\" required=\\"\\" class=\\"v-field__input\\">
           <!---->
         </div>
         <transition-stub name=\\"expand-x-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
