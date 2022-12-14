@@ -1,0 +1,53 @@
+// Vitest Snapshot v1
+
+exports[`AddPlaylistForm.vue > render 1`] = `
+"<form class=\\"v-form add-playlist-form\\" novalidate=\\"\\">
+  <div class=\\"v-input v-input--horizontal v-input--density-default v-text-field\\">
+    <!---->
+    <div class=\\"v-input__control\\">
+      <div class=\\"v-field v-field--appended v-field--variant-filled v-theme--light\\" role=\\"textbox\\">
+        <div class=\\"v-field__overlay\\"></div>
+        <div class=\\"v-field__loader\\">
+          <div class=\\"v-progress-linear v-theme--light\\" style=\\"height: 0px; --v-progress-linear-height: 2px;\\" role=\\"progressbar\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\">
+            <!---->
+            <div class=\\"v-progress-linear__background bg-primary\\" style=\\"width: 100%;\\"></div>
+            <transition-stub name=\\"fade-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+              <div class=\\"v-progress-linear__indeterminate\\">
+                <div class=\\"v-progress-linear__indeterminate long bg-primary\\"></div>
+                <div class=\\"v-progress-linear__indeterminate short bg-primary\\"></div>
+              </div>
+            </transition-stub>
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class=\\"v-field__field\\" data-no-activator=\\"\\"><label class=\\"v-label v-field-label v-field-label--floating\\" aria-hidden=\\"true\\" for=\\"input-0\\">
+            <!---->Название плейлиста
+          </label><label class=\\"v-label v-field-label\\" for=\\"input-0\\">
+            <!---->Название плейлиста
+          </label>
+          <!----><input size=\\"1\\" type=\\"text\\" id=\\"input-0\\" required=\\"\\" class=\\"v-field__input\\">
+          <!---->
+        </div>
+        <transition-stub name=\\"expand-x-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+          <div class=\\"v-field__clearable\\" style=\\"display: none;\\"><i class=\\"mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable\\" role=\\"button\\" aria-hidden=\\"false\\" aria-label=\\"Clear Название плейлиста\\"></i></div>
+        </transition-stub>
+        <div class=\\"v-field__append-inner\\">
+          <!---->
+          <!---->
+        </div>
+        <div class=\\"v-field__outline\\">
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+    <!---->
+  </div><button type=\\"submit\\" class=\\"v-btn v-btn--block v-btn--elevated v-theme--light bg-primary v-btn--density-default rounded-xl v-btn--size-large v-btn--variant-elevated mt-5\\"><span class=\\"v-btn__overlay\\"></span><span class=\\"v-btn__underlay\\"></span>
+    <!----><span class=\\"v-btn__content\\" data-no-activator=\\"\\"> Создать </span>
+    <!---->
+    <!---->
+  </button>
+</form>"
+`;
