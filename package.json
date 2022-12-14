@@ -19,6 +19,7 @@
     "lint": "npx eslint src --ext .js,.jsx,.ts,.tsx,.json,.html,.vue",
     "lint:fix": "npx eslint src --fix --ext .js,.jsx,.ts,.tsx,.json,.html,.vue",
     "test": "npx vitest",
+    "test:ui": "npx vitest --ui",
     "coverage": "npx vitest run --coverage"
   },
   "dependencies": {
@@ -43,6 +44,7 @@
     "@vitejs/plugin-vue": "^3.2.0",
     "@vitest/coverage-c8": "^0.25.8",
     "@vitest/coverage-istanbul": "^0.25.8",
+    "@vitest/ui": "^0.25.8",
     "@vue/test-utils": "^2.2.6",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
