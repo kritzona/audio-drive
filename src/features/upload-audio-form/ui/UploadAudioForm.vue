@@ -2,6 +2,7 @@
   <v-form ref="form" class="upload-audio-form" @submit.prevent="handleSubmit">
     <v-text-field
       v-model="name"
+      name="name"
       :readonly="loading"
       :rules="requiredTextRules"
       clearable
@@ -13,6 +14,7 @@
 
     <v-text-field
       v-model="author"
+      name="author"
       :readonly="loading"
       :rules="requiredTextRules"
       clearable
@@ -25,6 +27,7 @@
 
     <v-file-input
       v-model="covers"
+      name="covers"
       :readonly="loading"
       :rules="requiredFileRules"
       accept="image/png, image/jpeg, image/bmp"
@@ -37,6 +40,7 @@
 
     <v-file-input
       v-model="audios"
+      name="audios"
       :readonly="loading"
       :rules="requiredFileRules"
       accept="audio/mpeg"
@@ -115,4 +119,15 @@ const handleSubmit = async () => {
     url: await fileToBase64Url(audioFile),
   });
 };
+
+defineExpose({
+  form,
+  loading,
+  name,
+  author,
+  covers,
+  audios,
+
+  handleSubmit,
+});
 </script>
