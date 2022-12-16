@@ -26,7 +26,7 @@ exports[`UploadAudioForm.vue > render 1`] = `
           </label><label class=\\"v-label v-field-label\\" for=\\"input-0\\">
             <!---->Название
           </label>
-          <!----><input size=\\"1\\" type=\\"text\\" id=\\"input-0\\" required=\\"\\" class=\\"v-field__input\\">
+          <!----><input name=\\"name\\" size=\\"1\\" type=\\"text\\" id=\\"input-0\\" required=\\"\\" class=\\"v-field__input\\">
           <!---->
         </div>
         <transition-stub name=\\"expand-x-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
@@ -69,7 +69,7 @@ exports[`UploadAudioForm.vue > render 1`] = `
           </label><label class=\\"v-label v-field-label\\" for=\\"input-2\\">
             <!---->Исполнитель
           </label>
-          <!----><input size=\\"1\\" type=\\"text\\" id=\\"input-2\\" required=\\"\\" class=\\"v-field__input\\">
+          <!----><input name=\\"author\\" size=\\"1\\" type=\\"text\\" id=\\"input-2\\" required=\\"\\" class=\\"v-field__input\\">
           <!---->
         </div>
         <transition-stub name=\\"expand-x-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
@@ -113,7 +113,7 @@ exports[`UploadAudioForm.vue > render 1`] = `
             <!---->Обложка
           </label><label class=\\"v-label v-field-label\\" for=\\"input-5\\">
             <!---->Обложка
-          </label><input type=\\"file\\" id=\\"input-5\\" accept=\\"image/png, image/jpeg, image/bmp\\">
+          </label><input type=\\"file\\" name=\\"covers\\" id=\\"input-5\\" accept=\\"image/png, image/jpeg, image/bmp\\">
           <div class=\\"v-field__input\\">
             <!---->
           </div>
@@ -164,7 +164,7 @@ exports[`UploadAudioForm.vue > render 1`] = `
             <!---->Аудио-трек
           </label><label class=\\"v-label v-field-label\\" for=\\"input-7\\">
             <!---->Аудио-трек
-          </label><input type=\\"file\\" id=\\"input-7\\" accept=\\"audio/mpeg\\">
+          </label><input type=\\"file\\" name=\\"audios\\" id=\\"input-7\\" accept=\\"audio/mpeg\\">
           <div class=\\"v-field__input\\">
             <!---->
           </div>
