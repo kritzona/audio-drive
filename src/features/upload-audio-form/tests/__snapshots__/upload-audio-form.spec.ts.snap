@@ -1,0 +1,198 @@
+// Vitest Snapshot v1
+
+exports[`UploadAudioForm.vue > render 1`] = `
+"<form class=\\"v-form upload-audio-form\\" novalidate=\\"\\">
+  <div class=\\"v-input v-input--horizontal v-input--density-default v-text-field\\">
+    <!---->
+    <div class=\\"v-input__control\\">
+      <div class=\\"v-field v-field--appended v-field--variant-filled v-theme--light\\" role=\\"textbox\\">
+        <div class=\\"v-field__overlay\\"></div>
+        <div class=\\"v-field__loader\\">
+          <div class=\\"v-progress-linear v-theme--light\\" style=\\"height: 0px; --v-progress-linear-height: 2px;\\" role=\\"progressbar\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\">
+            <!---->
+            <div class=\\"v-progress-linear__background bg-primary\\" style=\\"width: 100%;\\"></div>
+            <transition-stub name=\\"fade-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+              <div class=\\"v-progress-linear__indeterminate\\">
+                <div class=\\"v-progress-linear__indeterminate long bg-primary\\"></div>
+                <div class=\\"v-progress-linear__indeterminate short bg-primary\\"></div>
+              </div>
+            </transition-stub>
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class=\\"v-field__field\\" data-no-activator=\\"\\"><label class=\\"v-label v-field-label v-field-label--floating\\" aria-hidden=\\"true\\" for=\\"input-0\\">
+            <!---->Название
+          </label><label class=\\"v-label v-field-label\\" for=\\"input-0\\">
+            <!---->Название
+          </label>
+          <!----><input name=\\"name\\" size=\\"1\\" type=\\"text\\" id=\\"input-0\\" required=\\"\\" class=\\"v-field__input\\">
+          <!---->
+        </div>
+        <transition-stub name=\\"expand-x-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+          <div class=\\"v-field__clearable\\" style=\\"display: none;\\"><i class=\\"mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable\\" role=\\"button\\" aria-hidden=\\"false\\" aria-label=\\"Clear Название\\"></i></div>
+        </transition-stub>
+        <div class=\\"v-field__append-inner\\">
+          <!---->
+          <!---->
+        </div>
+        <div class=\\"v-field__outline\\">
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+    <!---->
+  </div>
+  <div class=\\"v-input v-input--horizontal v-input--density-default v-text-field mt-5\\">
+    <!---->
+    <div class=\\"v-input__control\\">
+      <div class=\\"v-field v-field--appended v-field--variant-filled v-theme--light\\" role=\\"textbox\\">
+        <div class=\\"v-field__overlay\\"></div>
+        <div class=\\"v-field__loader\\">
+          <div class=\\"v-progress-linear v-theme--light\\" style=\\"height: 0px; --v-progress-linear-height: 2px;\\" role=\\"progressbar\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\">
+            <!---->
+            <div class=\\"v-progress-linear__background bg-primary\\" style=\\"width: 100%;\\"></div>
+            <transition-stub name=\\"fade-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+              <div class=\\"v-progress-linear__indeterminate\\">
+                <div class=\\"v-progress-linear__indeterminate long bg-primary\\"></div>
+                <div class=\\"v-progress-linear__indeterminate short bg-primary\\"></div>
+              </div>
+            </transition-stub>
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class=\\"v-field__field\\" data-no-activator=\\"\\"><label class=\\"v-label v-field-label v-field-label--floating\\" aria-hidden=\\"true\\" for=\\"input-2\\">
+            <!---->Исполнитель
+          </label><label class=\\"v-label v-field-label\\" for=\\"input-2\\">
+            <!---->Исполнитель
+          </label>
+          <!----><input name=\\"author\\" size=\\"1\\" type=\\"text\\" id=\\"input-2\\" required=\\"\\" class=\\"v-field__input\\">
+          <!---->
+        </div>
+        <transition-stub name=\\"expand-x-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+          <div class=\\"v-field__clearable\\" style=\\"display: none;\\"><i class=\\"mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable\\" role=\\"button\\" aria-hidden=\\"false\\" aria-label=\\"Clear Исполнитель\\"></i></div>
+        </transition-stub>
+        <div class=\\"v-field__append-inner\\">
+          <!---->
+          <!---->
+        </div>
+        <div class=\\"v-field__outline\\">
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+    <!---->
+  </div>
+  <div class=\\"v-input v-input--horizontal v-input--density-default v-file-input mt-5\\">
+    <div class=\\"v-input__prepend\\">
+      <!----><i class=\\"mdi-camera mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable\\" role=\\"button\\" aria-hidden=\\"false\\" aria-label=\\"Обложка prepended action\\"></i>
+    </div>
+    <div class=\\"v-input__control\\">
+      <div class=\\"v-field v-field--appended v-field--variant-filled v-theme--light\\" prepend-icon=\\"mdi-camera\\">
+        <div class=\\"v-field__overlay\\"></div>
+        <div class=\\"v-field__loader\\">
+          <div class=\\"v-progress-linear v-theme--light\\" style=\\"height: 0px; --v-progress-linear-height: 2px;\\" role=\\"progressbar\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\">
+            <!---->
+            <div class=\\"v-progress-linear__background bg-primary\\" style=\\"width: 100%;\\"></div>
+            <transition-stub name=\\"fade-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+              <div class=\\"v-progress-linear__indeterminate\\">
+                <div class=\\"v-progress-linear__indeterminate long bg-primary\\"></div>
+                <div class=\\"v-progress-linear__indeterminate short bg-primary\\"></div>
+              </div>
+            </transition-stub>
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class=\\"v-field__field\\" data-no-activator=\\"\\"><label class=\\"v-label v-field-label v-field-label--floating\\" aria-hidden=\\"true\\" for=\\"input-5\\">
+            <!---->Обложка
+          </label><label class=\\"v-label v-field-label\\" for=\\"input-5\\">
+            <!---->Обложка
+          </label><input type=\\"file\\" name=\\"covers\\" id=\\"input-5\\" accept=\\"image/png, image/jpeg, image/bmp\\">
+          <div class=\\"v-field__input\\">
+            <!---->
+          </div>
+        </div>
+        <transition-stub name=\\"expand-x-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+          <div class=\\"v-field__clearable\\" style=\\"display: none;\\"><i class=\\"mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable\\" role=\\"button\\" aria-hidden=\\"false\\" aria-label=\\"Clear Обложка\\"></i></div>
+        </transition-stub>
+        <div class=\\"v-field__append-inner\\">
+          <!---->
+          <!---->
+        </div>
+        <div class=\\"v-field__outline\\">
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+    <div class=\\"v-input__details\\">
+      <transition-group-stub name=\\"slide-y-transition\\" tag=\\"div\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\" class=\\"v-messages\\">
+        <!---->
+      </transition-group-stub>
+      <!---->
+    </div>
+  </div>
+  <div class=\\"v-input v-input--horizontal v-input--density-default v-file-input\\">
+    <div class=\\"v-input__prepend\\">
+      <!----><i class=\\"mdi-music mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable\\" role=\\"button\\" aria-hidden=\\"false\\" aria-label=\\"Аудио-трек prepended action\\"></i>
+    </div>
+    <div class=\\"v-input__control\\">
+      <div class=\\"v-field v-field--appended v-field--variant-filled v-theme--light\\" prepend-icon=\\"mdi-music\\">
+        <div class=\\"v-field__overlay\\"></div>
+        <div class=\\"v-field__loader\\">
+          <div class=\\"v-progress-linear v-theme--light\\" style=\\"height: 0px; --v-progress-linear-height: 2px;\\" role=\\"progressbar\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\">
+            <!---->
+            <div class=\\"v-progress-linear__background bg-primary\\" style=\\"width: 100%;\\"></div>
+            <transition-stub name=\\"fade-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+              <div class=\\"v-progress-linear__indeterminate\\">
+                <div class=\\"v-progress-linear__indeterminate long bg-primary\\"></div>
+                <div class=\\"v-progress-linear__indeterminate short bg-primary\\"></div>
+              </div>
+            </transition-stub>
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class=\\"v-field__field\\" data-no-activator=\\"\\"><label class=\\"v-label v-field-label v-field-label--floating\\" aria-hidden=\\"true\\" for=\\"input-7\\">
+            <!---->Аудио-трек
+          </label><label class=\\"v-label v-field-label\\" for=\\"input-7\\">
+            <!---->Аудио-трек
+          </label><input type=\\"file\\" name=\\"audios\\" id=\\"input-7\\" accept=\\"audio/mpeg\\">
+          <div class=\\"v-field__input\\">
+            <!---->
+          </div>
+        </div>
+        <transition-stub name=\\"expand-x-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+          <div class=\\"v-field__clearable\\" style=\\"display: none;\\"><i class=\\"mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable\\" role=\\"button\\" aria-hidden=\\"false\\" aria-label=\\"Clear Аудио-трек\\"></i></div>
+        </transition-stub>
+        <div class=\\"v-field__append-inner\\">
+          <!---->
+          <!---->
+        </div>
+        <div class=\\"v-field__outline\\">
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+    <div class=\\"v-input__details\\">
+      <transition-group-stub name=\\"slide-y-transition\\" tag=\\"div\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\" class=\\"v-messages\\">
+        <!---->
+      </transition-group-stub>
+      <!---->
+    </div>
+  </div><button type=\\"submit\\" class=\\"v-btn v-btn--block v-btn--elevated v-theme--light bg-primary v-btn--density-default rounded-xl v-btn--size-large v-btn--variant-elevated mt-5\\"><span class=\\"v-btn__overlay\\"></span><span class=\\"v-btn__underlay\\"></span>
+    <!----><span class=\\"v-btn__content\\" data-no-activator=\\"\\"> Загрузить </span>
+    <!---->
+    <!---->
+  </button>
+</form>"
+`;

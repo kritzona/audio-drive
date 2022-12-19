@@ -2,6 +2,7 @@
   <v-form ref="form" class="add-playlist-form" @submit.prevent="handleSubmit">
     <v-text-field
       v-model="name"
+      name="name"
       :readonly="loading"
       :rules="requiredTextRules"
       clearable
@@ -58,4 +59,12 @@ const handleSubmit = async () => {
     tracks: [],
   });
 };
+
+defineExpose({
+  form,
+  loading,
+  name,
+
+  handleSubmit,
+});
 </script>

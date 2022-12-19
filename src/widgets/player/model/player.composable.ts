@@ -130,6 +130,7 @@ export const usePlayer = () => {
     elapsedSeconds,
     hasError,
 
+    initTrack,
     play,
     pause,
     stop,
