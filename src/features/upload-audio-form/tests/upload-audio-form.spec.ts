@@ -43,6 +43,8 @@ describe('UploadAudioForm.vue', () => {
 
     await wrapper.find('input[name="name"]').setValue('Тестовая песня');
     await wrapper.find('input[name="author"]').setValue('Исполнитель');
+    wrapper.vm.handleCoversUpload([new File([''], 'cover.png')]);
+    wrapper.vm.handleAudiosUpload([new File([''], 'audio.mp3')]);
 
     await wrapper.vm.handleSubmit();
 
