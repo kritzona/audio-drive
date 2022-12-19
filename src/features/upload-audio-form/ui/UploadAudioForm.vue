@@ -26,7 +26,7 @@
     />
 
     <v-file-input
-      v-model="covers"
+      :model-value="covers"
       name="covers"
       :readonly="loading"
       :rules="requiredFileRules"
@@ -36,10 +36,11 @@
       prepend-icon="mdi-camera"
       show-size
       class="mt-5"
+      @update:model-value="handleCoversUpload"
     />
 
     <v-file-input
-      v-model="audios"
+      :model-value="audios"
       name="audios"
       :readonly="loading"
       :rules="requiredFileRules"
@@ -48,6 +49,7 @@
       color="primary"
       prepend-icon="mdi-music"
       show-size
+      @update:model-value="handleAudiosUpload"
     />
 
     <v-btn
@@ -64,12 +66,14 @@
 </template>
 
 <script lang="ts" setup>
-import { usePlayerStore } from '@/widgets/player';
+import { usePlayer, usePlayerStore } from '@/widgets/player';
 import { ref } from 'vue';
 import { fileToBase64Url } from '@/shared/lib';
 import { VForm } from 'vuetify/components';
 import { requiredFileRules, requiredTextRules } from '@/shared/constants';
 import { useForm } from '@/shared/model';
+
+const player = usePlayer();
 
 /**
  * Хранилище данных плеера
@@ -99,6 +103,20 @@ const covers = ref<File[]>([]);
 const audios = ref<File[]>([]);
 
 /**
+ * Обработчик загрузки обложек
+ *
+ * @param files Файлы обложек
+ */
+const handleCoversUpload = (files: File[]) => (covers.value = files);
+
+/**
+ * Обработчик загрузки аудио-треков
+ *
+ * @param files Файлы аудио-треков
+ */
+const handleAudiosUpload = (files: File[]) => (audios.value = files);
+
+/**
  * Обработчик отправки формы
  *
  * @async
@@ -109,7 +127,7 @@ const handleSubmit = async () => {
   const [coverFile] = covers.value;
   const [audioFile] = audios.value;
 
-  playerStore.setup({
+  player.initTrack({
     id: '1',
     name: name.value,
     author: author.value,
@@ -128,6 +146,8 @@ defineExpose({
   covers,
   audios,
 
+  handleCoversUpload,
+  handleAudiosUpload,
   handleSubmit,
 });
 </script>
