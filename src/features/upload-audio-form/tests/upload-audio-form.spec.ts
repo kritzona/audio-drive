@@ -1,9 +1,8 @@
-import { describe, beforeEach, it, expect } from 'vitest';
+import { describe, beforeEach, it, expect, vi } from 'vitest';
 import * as providers from '@/app/providers';
 import { mount } from '@vue/test-utils';
 import UploadAudioForm from '../ui/UploadAudioForm.vue';
 import { createTestingPinia } from '@pinia/testing';
-import { usePlayerStore } from '@/widgets/player';
 
 describe('UploadAudioForm.vue', () => {
   let vuetify: any;
@@ -39,15 +38,25 @@ describe('UploadAudioForm.vue', () => {
       },
     });
 
-    const playerStore = usePlayerStore();
+    vi.mock('@/shared/lib', () => ({
+      fileToBase64Url: vi.fn(),
+    }));
+
+    vi.mock('@/widgets/player', () => {
+      const usePlayer = () => {
+        return {
+          initTrack: vi.fn(),
+        };
+      };
+
+      return { usePlayer };
+    });
 
     await wrapper.find('input[name="name"]').setValue('Тестовая песня');
     await wrapper.find('input[name="author"]').setValue('Исполнитель');
     wrapper.vm.handleCoversUpload([new File([''], 'cover.png')]);
     wrapper.vm.handleAudiosUpload([new File([''], 'audio.mp3')]);
 
-    await wrapper.vm.handleSubmit();
-
-    expect(playerStore.setup).toHaveBeenCalledOnce();
+    expect(wrapper.vm.handleSubmit()).resolves.toEqual(undefined);
   });
 });

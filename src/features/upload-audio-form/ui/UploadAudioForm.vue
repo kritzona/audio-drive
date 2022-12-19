@@ -66,19 +66,17 @@
 </template>
 
 <script lang="ts" setup>
-import { usePlayer, usePlayerStore } from '@/widgets/player';
+import { usePlayer } from '@/widgets/player';
 import { ref } from 'vue';
 import { fileToBase64Url } from '@/shared/lib';
 import { VForm } from 'vuetify/components';
 import { requiredFileRules, requiredTextRules } from '@/shared/constants';
 import { useForm } from '@/shared/model';
 
-const player = usePlayer();
-
 /**
- * Хранилище данных плеера
+ * Бизнес-логика для работы с плеером
  */
-const playerStore = usePlayerStore();
+const player = usePlayer();
 
 /**
  * Бизнес-логика для работы с формой
