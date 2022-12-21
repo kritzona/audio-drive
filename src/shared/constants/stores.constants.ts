@@ -8,4 +8,5 @@ export enum Stores {
   AUDIO = 'audio',
   PLAYLIST = 'playlist',
   USER_PLAYLIST = 'user-playlist',
+  USER_AUDIO = 'user-audio',
 }
