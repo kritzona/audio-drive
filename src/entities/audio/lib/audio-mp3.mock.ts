@@ -1,3 +1,4 @@
+import * as uuid from 'uuid';
 import { AudioModel } from '@/entities/audio';
 
 /**
@@ -6,7 +7,7 @@ import { AudioModel } from '@/entities/audio';
  * @returns Созданный аудио-трек
  */
 export const createAudioMp3Mock = (): AudioModel => ({
-  id: '1',
+  id: uuid.v4(),
   url: '/mock-audio/LanaDelRey_SummertimeSadness.mp3',
   fileName: 'LanaDelRey_SummertimeSadness.mp3',
   cover: '/mock-covers/LanaDelRey_SummertimeSadness.jpeg',
