@@ -4,11 +4,11 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 /**
- * Хранилище данных для плеера
+ * Хранилище данных для аудио
  *
  * @return {object} Публичные методы и свойства для работы с хранилищем
  */
-export const usePlayerStore = defineStore(Stores.PLAYER, () => {
+export const useAudioStore = defineStore(Stores.AUDIO, () => {
   /**
    * Информация об аудио
    */

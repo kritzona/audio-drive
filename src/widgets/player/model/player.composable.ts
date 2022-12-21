@@ -1,6 +1,6 @@
 import { createAudioMp3Mock } from '@/entities/audio';
 import { AudioModel, AudioService } from '@/entities/audio';
-import { usePlayerStore } from './player.store';
+import { useAudioStore } from '@/entities/audio';
 import { usePlaylistStore } from '@/entities/playlist';
 import { reactive, onBeforeMount, toRefs } from 'vue';
 
@@ -13,7 +13,7 @@ export const usePlayer = () => {
   /**
    * Хранилище данных плеера
    */
-  const playerStore = usePlayerStore();
+  const audioStore = useAudioStore();
 
   /**
    * Хранилище данных текущего плейлиста
@@ -25,7 +25,7 @@ export const usePlayer = () => {
    * которые необходимы для компонентов
    */
   const { audio, playing, stoped, duration, elapsedSeconds, hasError } = toRefs(
-    playerStore.$state
+    audioStore.$state
   );
 
   /**
@@ -51,7 +51,7 @@ export const usePlayer = () => {
    */
   const initTrack = (audio: AudioModel, playNow = false) => {
     AudioService.change(audio, () => {
-      playerStore.setup(audio);
+      audioStore.setup(audio);
 
       if (playNow) {
         play();
@@ -68,15 +68,15 @@ export const usePlayer = () => {
     try {
       await AudioService.play();
 
-      playerStore.setPlayed();
+      audioStore.setPlayed();
 
       AudioService.listenTimeChange((seconds) =>
-        playerStore.setSecondsElapsed(seconds)
+        audioStore.setSecondsElapsed(seconds)
       );
 
       AudioService.listenTrackEnd(() => next());
     } catch {
-      playerStore.setError();
+      audioStore.setError();
     }
   };
 
@@ -85,7 +85,7 @@ export const usePlayer = () => {
    */
   const pause = () => {
     AudioService.pause();
-    playerStore.setPaused();
+    audioStore.setPaused();
   };
 
   /**
@@ -93,7 +93,7 @@ export const usePlayer = () => {
    */
   const stop = () => {
     AudioService.stop();
-    playerStore.setStoped();
+    audioStore.setStoped();
   };
 
   /**
@@ -103,7 +103,7 @@ export const usePlayer = () => {
    */
   const skipTo = (seconds: number) => {
     AudioService.setCurrentTime(seconds);
-    playerStore.setSecondsElapsed(seconds);
+    audioStore.setSecondsElapsed(seconds);
   };
 
   /**
