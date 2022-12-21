@@ -5,7 +5,7 @@ import { ElementEventManager } from '@/shared/lib';
 /**
  * Сервис для работы с Audio API
  */
-class AudioService {
+class AudioApiService {
   /**
    * DOM-элемент для работы с Audio API
    */
@@ -113,4 +113,4 @@ class AudioService {
   }
 }
 
-export default AudioService;
+export default AudioApiService;

@@ -1,5 +1,5 @@
 import { Stores } from '@/shared/constants';
-import { AudioModel, AudioService } from '@/entities/audio';
+import { AudioModel, AudioApiService } from '@/entities/audio';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -52,9 +52,9 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
   const setup = (newAudio: AudioModel, playNow = false) => {
     reset();
 
-    AudioService.change(newAudio, () => {
+    AudioApiService.change(newAudio, () => {
       audio.value = newAudio;
-      duration.value = AudioService.duration;
+      duration.value = AudioApiService.duration;
 
       if (playNow) {
         play();
@@ -77,13 +77,13 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
    */
   const play = async () => {
     try {
-      await AudioService.play();
+      await AudioApiService.play();
 
       setPlaying();
 
-      AudioService.listenTimeChange((seconds) => setElapsedSeconds(seconds));
+      AudioApiService.listenTimeChange((seconds) => setElapsedSeconds(seconds));
 
-      AudioService.listenTrackEnd(() => setEnded());
+      AudioApiService.listenTrackEnd(() => setEnded());
     } catch {
       setError();
     }
@@ -101,7 +101,7 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
    * Остановка трека на паузу
    */
   const pause = () => {
-    AudioService.pause();
+    AudioApiService.pause();
 
     setPaused();
   };
@@ -118,7 +118,7 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
    * Полная остановка трека
    */
   const stop = () => {
-    AudioService.stop();
+    AudioApiService.stop();
 
     setStoped();
   };
@@ -138,7 +138,7 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
    * @param seconds Секунда, до которой нужно проматать трек
    */
   const skipTo = (seconds: number) => {
-    AudioService.setCurrentTime(seconds);
+    AudioApiService.setCurrentTime(seconds);
 
     setElapsedSeconds(seconds);
   };
