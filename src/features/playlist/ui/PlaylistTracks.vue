@@ -1,6 +1,6 @@
 <template>
   <v-list lines="two">
-    <PlaylistTrack
+    <AudioTrack
       v-for="track in tracks"
       :id="track.id"
       :key="track.id"
@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { PlaylistModel } from '../model/playlist.model';
-import PlaylistTrack from './PlaylistTrack.vue';
+import { AudioTrack } from '@/entities/audio';
 
 defineProps<{
   tracks: PlaylistModel['tracks'];

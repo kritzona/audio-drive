@@ -21,7 +21,8 @@
 </template>
 
 <script lang="ts" setup>
-import { AudioModel, useAudioStore } from '@/entities/audio';
+import { AudioModel } from '../model/audio.model';
+import { useAudioStore } from '../model/audio.store';
 import SharedUI from '@/shared/ui';
 import { computed } from 'vue';
 
@@ -32,10 +33,19 @@ const props = defineProps<{
   cover: AudioModel['cover'];
 }>();
 
+/**
+ * Хранилище для работы с аудио
+ */
 const audioStore = useAudioStore();
 
+/**
+ * Является ли аудио текущим треком
+ */
 const isCurrentTrack = computed(() => props.id === audioStore.audio?.id);
 
+/**
+ * Обработчик кнопки воспроизведения
+ */
 const handlePlayButtonClick = () => {
   if (!isCurrentTrack.value) {
     return;
@@ -44,6 +54,9 @@ const handlePlayButtonClick = () => {
   audioStore.play();
 };
 
+/**
+ * Обработчик кнопки паузы
+ */
 const handlePauseButtonClick = () => {
   audioStore.pause();
 };
