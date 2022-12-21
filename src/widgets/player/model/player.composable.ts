@@ -1,7 +1,6 @@
-import { createAudioMp3Mock } from '@/entities/audio';
 import { AudioModel } from '@/entities/audio';
 import { useAudioStore } from '@/entities/audio';
-import { usePlaylistStore } from '@/features/playlist';
+import { createPlaylistMock, usePlaylistStore } from '@/features/playlist';
 import { reactive, onBeforeMount, toRefs } from 'vue';
 
 /**
@@ -32,12 +31,7 @@ export const usePlayer = () => {
    * Инициализация плейлиста и плеера
    */
   onBeforeMount(() => {
-    playlistStore.setup([
-      createAudioMp3Mock(),
-      createAudioMp3Mock(),
-      createAudioMp3Mock(),
-      createAudioMp3Mock(),
-    ]);
+    playlistStore.setup(createPlaylistMock('Тест'));
 
     const firstTrack = playlistStore.first();
     if (firstTrack) initTrack(firstTrack);
