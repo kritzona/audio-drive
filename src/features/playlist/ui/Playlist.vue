@@ -11,6 +11,7 @@ import { PlaylistModel } from '../model/playlist.model';
 import { usePlaylistStore } from '../model/playlist.store';
 import PlaylistTracks from './PlaylistTracks.vue';
 import { computed } from 'vue';
+import { useAudioStore } from '@/entities/audio';
 
 const props = defineProps<{
   id: PlaylistModel['id'];
@@ -18,6 +19,7 @@ const props = defineProps<{
   tracks: PlaylistModel['tracks'];
 }>();
 
+const audioStore = useAudioStore();
 const playlistStore = usePlaylistStore();
 
 const playlist = computed(() => ({
@@ -28,5 +30,6 @@ const playlist = computed(() => ({
 
 const handleTrackSelect = (id: string) => {
   playlistStore.setup(playlist.value, id);
+  audioStore.setup(playlistStore.currentTrack, true);
 };
 </script>
