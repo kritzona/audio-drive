@@ -5,7 +5,7 @@
  * @enum {string}
  */
 export enum Stores {
-  PLAYER = 'player',
+  AUDIO = 'audio',
   PLAYLIST = 'playlist',
   USER_PLAYLIST = 'user-playlist',
 }

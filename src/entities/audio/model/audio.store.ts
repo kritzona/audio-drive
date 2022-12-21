@@ -4,11 +4,11 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 /**
- * Хранилище данных для плеера
+ * Хранилище данных для аудио
  *
  * @return {object} Публичные методы и свойства для работы с хранилищем
  */
-export const usePlayerStore = defineStore(Stores.PLAYER, () => {
+export const useAudioStore = defineStore(Stores.AUDIO, () => {
   /**
    * Информация об аудио
    */
@@ -40,23 +40,53 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   const duration = ref<number>(0);
 
   /**
+   * Состояние окончания трека
+   */
+  const ended = ref<boolean>(false);
+
+  /**
    * Инициализация трека в хранилище
    *
    * @param newAudio Новое аудио
    */
-  const setup = (newAudio: AudioModel) => {
+  const setup = (newAudio: AudioModel, playNow = false) => {
     reset();
 
-    audio.value = newAudio;
-    duration.value = AudioService.duration;
+    AudioService.change(newAudio, () => {
+      audio.value = newAudio;
+      duration.value = AudioService.duration;
+
+      if (playNow) {
+        play();
+      }
+    });
   };
 
   /**
    * Выставление состояния для воспроизведения
    */
-  const setPlayed = () => {
+  const setPlaying = () => {
     playing.value = true;
     stoped.value = false;
+  };
+
+  /**
+   * Воспроизведение трека
+   *
+   * @async
+   */
+  const play = async () => {
+    try {
+      await AudioService.play();
+
+      setPlaying();
+
+      AudioService.listenTimeChange((seconds) => setElapsedSeconds(seconds));
+
+      AudioService.listenTrackEnd(() => setEnded());
+    } catch {
+      setError();
+    }
   };
 
   /**
@@ -68,6 +98,15 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   };
 
   /**
+   * Остановка трека на паузу
+   */
+  const pause = () => {
+    AudioService.pause();
+
+    setPaused();
+  };
+
+  /**
    * Выставление состояния для полной остановки воспроизведения
    */
   const setStoped = () => {
@@ -76,12 +115,32 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
   };
 
   /**
+   * Полная остановка трека
+   */
+  const stop = () => {
+    AudioService.stop();
+
+    setStoped();
+  };
+
+  /**
    * Выставление количество пройденных секунд с момента воспроизведения
    *
    * @param seconds Количество секунд
    */
-  const setSecondsElapsed = (seconds: number) => {
+  const setElapsedSeconds = (seconds: number) => {
     elapsedSeconds.value = seconds;
+  };
+
+  /**
+   * Проматывание трека до указанной секунды
+   *
+   * @param seconds Секунда, до которой нужно проматать трек
+   */
+  const skipTo = (seconds: number) => {
+    AudioService.setCurrentTime(seconds);
+
+    setElapsedSeconds(seconds);
   };
 
   /**
@@ -89,6 +148,13 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
    */
   const setError = () => {
     hasError.value = true;
+  };
+
+  /**
+   * Указать, что трек полностью завершен
+   */
+  const setEnded = () => {
+    ended.value = true;
   };
 
   /**
@@ -101,6 +167,7 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
     elapsedSeconds.value = 0;
     hasError.value = false;
     duration.value = 0;
+    ended.value = false;
   };
 
   return {
@@ -110,12 +177,12 @@ export const usePlayerStore = defineStore(Stores.PLAYER, () => {
     elapsedSeconds,
     hasError,
     duration,
+    ended,
 
     setup,
-    setPlayed,
-    setPaused,
-    setStoped,
-    setSecondsElapsed,
-    setError,
+    play,
+    pause,
+    stop,
+    skipTo,
   };
 });

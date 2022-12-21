@@ -1,7 +1,6 @@
-import { createAudioMp3Mock } from '@/entities/audio';
-import { AudioModel, AudioService } from '@/entities/audio';
-import { usePlayerStore } from './player.store';
-import { usePlaylistStore } from '@/entities/playlist';
+import { AudioModel } from '@/entities/audio';
+import { useAudioStore } from '@/entities/audio';
+import { createPlaylistMock, usePlaylistStore } from '@/features/playlist';
 import { reactive, onBeforeMount, toRefs } from 'vue';
 
 /**
@@ -11,9 +10,9 @@ import { reactive, onBeforeMount, toRefs } from 'vue';
  */
 export const usePlayer = () => {
   /**
-   * Хранилище данных плеера
+   * Хранилище данных аудио-трека
    */
-  const playerStore = usePlayerStore();
+  const audioStore = useAudioStore();
 
   /**
    * Хранилище данных текущего плейлиста
@@ -25,19 +24,14 @@ export const usePlayer = () => {
    * которые необходимы для компонентов
    */
   const { audio, playing, stoped, duration, elapsedSeconds, hasError } = toRefs(
-    playerStore.$state
+    audioStore.$state
   );
 
   /**
    * Инициализация плейлиста и плеера
    */
   onBeforeMount(() => {
-    playlistStore.setup([
-      createAudioMp3Mock(),
-      createAudioMp3Mock(),
-      createAudioMp3Mock(),
-      createAudioMp3Mock(),
-    ]);
+    playlistStore.setup(createPlaylistMock('Тест'));
 
     const firstTrack = playlistStore.first();
     if (firstTrack) initTrack(firstTrack);
@@ -50,13 +44,7 @@ export const usePlayer = () => {
    * @param playNow Флаг для воспроизведения сразу после инициализации
    */
   const initTrack = (audio: AudioModel, playNow = false) => {
-    AudioService.change(audio, () => {
-      playerStore.setup(audio);
-
-      if (playNow) {
-        play();
-      }
-    });
+    audioStore.setup(audio, playNow);
   };
 
   /**
@@ -65,35 +53,21 @@ export const usePlayer = () => {
    * @async
    */
   const play = async () => {
-    try {
-      await AudioService.play();
-
-      playerStore.setPlayed();
-
-      AudioService.listenTimeChange((seconds) =>
-        playerStore.setSecondsElapsed(seconds)
-      );
-
-      AudioService.listenTrackEnd(() => next());
-    } catch {
-      playerStore.setError();
-    }
+    await audioStore.play();
   };
 
   /**
    * Остановка трека на паузу
    */
   const pause = () => {
-    AudioService.pause();
-    playerStore.setPaused();
+    audioStore.pause();
   };
 
   /**
    * Полная остановка трека
    */
   const stop = () => {
-    AudioService.stop();
-    playerStore.setStoped();
+    audioStore.stop();
   };
 
   /**
@@ -102,8 +76,7 @@ export const usePlayer = () => {
    * @param seconds Секунда, до которой нужно проматать трек
    */
   const skipTo = (seconds: number) => {
-    AudioService.setCurrentTime(seconds);
-    playerStore.setSecondsElapsed(seconds);
+    audioStore.skipTo(seconds);
   };
 
   /**

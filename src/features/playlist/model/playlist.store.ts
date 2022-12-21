@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia';
 import { Stores } from '@/shared/constants';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { AudioModel } from '@/entities/audio';
+import { PlaylistModel } from './playlist.model';
 
 /**
  * Хранилище данных для выбранного плейлиста
@@ -9,6 +10,11 @@ import { AudioModel } from '@/entities/audio';
  * @returns {object} Публичные методы и свойства для работы с хранилищем
  */
 export const usePlaylistStore = defineStore(Stores.PLAYLIST, () => {
+  /**
+   * Идентификатор плейлиста
+   */
+  const id = ref<string | null>(null);
+
   /**
    * Имя плейлиста
    */
@@ -25,12 +31,34 @@ export const usePlaylistStore = defineStore(Stores.PLAYLIST, () => {
   const currentTrackIndex = ref<number>(0);
 
   /**
+   * Текущий трек
+   */
+  const currentTrack = computed(() => tracks.value[currentTrackIndex.value]);
+
+  /**
    * Инициализация плейлиста
    *
    * @param audios Список треков плейлиста
+   * @param beginWith Идентификатор аудио-трека, с которого нужно начать плейлист
    */
-  const setup = (audios: AudioModel[]) => {
-    tracks.value = [...audios];
+  const setup = (playlist: PlaylistModel, beginWith?: string) => {
+    id.value = playlist.id;
+    name.value = playlist.name;
+    tracks.value = [...playlist.tracks];
+
+    if (beginWith) {
+      setCurrentTrackById(beginWith);
+    } else {
+      currentTrackIndex.value = 0;
+    }
+  };
+
+  /**
+   * Переключение трека по идентификатору
+   */
+  const setCurrentTrackById = (id: string) => {
+    const trackIndex = tracks.value.findIndex((track) => id === track.id);
+    currentTrackIndex.value = trackIndex;
   };
 
   /**
@@ -112,6 +140,7 @@ export const usePlaylistStore = defineStore(Stores.PLAYLIST, () => {
   return {
     name,
     tracks,
+    currentTrack,
     currentTrackIndex,
 
     setup,
