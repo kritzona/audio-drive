@@ -1,8 +1,8 @@
 import { Stores } from '@/shared/constants';
 import { defineStore } from 'pinia';
-import { AudioModel } from './audio.model';
+import { AudioCreateModel, AudioModel } from './audio.model';
 import { ref } from 'vue';
-import { AudioService } from '../lib/audio.service';
+import AudioService from '../lib/audio.service';
 
 /**
  * Хранилище для списка всех аудио-треков текущего пользователя
@@ -38,10 +38,10 @@ export const useUserAudioStore = defineStore(Stores.USER_AUDIO, () => {
   /**
    * Добавление нового аудио-трека
    *
-   * @param audio Новый аудио-трек
+   * @param audioForm Новый аудио-трек
    */
-  const add = (audio: AudioModel) => {
-    items.value.push(audio);
+  const add = async (audioForm: AudioCreateModel) => {
+    items.value.push(await AudioService.create(audioForm));
 
     AudioService.commit(items.value);
   };

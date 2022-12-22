@@ -66,16 +66,19 @@
 </template>
 
 <script lang="ts" setup>
-import { usePlayer } from '@/widgets/player';
 import { ref } from 'vue';
-import { fileToBase64Url } from '@/shared/lib';
 import { VForm } from 'vuetify/components';
 import { requiredFileRules, requiredTextRules } from '@/shared/constants';
 import { useForm } from '@/shared/model';
+import { useUserAudioStore } from '@/entities/audio/model/user-audio.store';
+import { usePlayer } from '@/widgets/player';
+import { AudioService } from '@/entities/audio';
 
 /**
- * Бизнес-логика для работы с плеером
+ * Бизнес-логика для работы с
  */
+const userAudioStore = useUserAudioStore();
+
 const player = usePlayer();
 
 /**
@@ -125,15 +128,16 @@ const handleSubmit = async () => {
   const [coverFile] = covers.value;
   const [audioFile] = audios.value;
 
-  player.initTrack({
-    id: '1',
+  await userAudioStore.add({
     name: name.value,
     author: author.value,
-    cover: await fileToBase64Url(coverFile),
+    cover: coverFile,
+    audio: audioFile,
     fileName: audioFile.name,
     format: audioFile.type,
-    url: await fileToBase64Url(audioFile),
   });
+
+  player.initTrack(await AudioService.wrapAudio(userAudioStore.items[0]));
 };
 
 defineExpose({

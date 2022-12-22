@@ -23,3 +23,8 @@ export interface AudioModel {
   /** Автор */
   author: string;
 }
+
+export type AudioCreateModel = Omit<AudioModel, 'id' | 'url' | 'cover'> & {
+  cover: File;
+  audio: File;
+};
