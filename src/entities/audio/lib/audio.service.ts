@@ -9,27 +9,34 @@ class AudioService {
   /**
    * DOM-элемент для работы с Audio API
    */
-  protected static readonly element = new Audio();
+  protected static readonly _element = new Audio();
 
   /**
    * Менеджер событий для DOM-элементов
    */
   protected static readonly eventManager = new ElementEventManager(
-    this.element
+    this._element
   );
 
   /**
    * Имеются ли дефекты при воспроизведении
    */
   protected static get hasDefect() {
-    return Boolean(this.element.HAVE_NOTHING || this.element.NETWORK_EMPTY);
+    return Boolean(this._element.HAVE_NOTHING || this._element.NETWORK_EMPTY);
   }
 
   /**
    * Продолжительность трека
    */
   static get duration() {
-    return Math.ceil(this.element.duration);
+    return Math.ceil(this._element.duration);
+  }
+
+  /**
+   * Аудио-элемент
+   */
+  static get element() {
+    return this._element;
   }
 
   /**
@@ -41,7 +48,7 @@ class AudioService {
   static change(audio: AudioModel, onReady?: () => void) {
     this.eventManager.clear();
 
-    this.element.src = audio.url;
+    this._element.src = audio.url;
 
     if (onReady) {
       this.eventManager.add('loadeddata', onReady);
@@ -61,14 +68,14 @@ class AudioService {
       return Promise.reject(Errors.PLAY);
     }
 
-    return this.element.play();
+    return this._element.play();
   }
 
   /**
    * Остановка трека на паузу
    */
   static pause() {
-    this.element.pause();
+    this._element.pause();
   }
 
   /**
@@ -85,7 +92,7 @@ class AudioService {
    * @param seconds Секунда, с которой необходимо воспроизвести трек
    */
   static setCurrentTime(seconds: number) {
-    this.element.currentTime = seconds;
+    this._element.currentTime = seconds;
   }
 
   /**
@@ -96,7 +103,7 @@ class AudioService {
    */
   static listenTimeChange(callback: (seconds: number) => void) {
     this.eventManager.add('timeupdate', () => {
-      const currentTime = Math.floor(this.element.currentTime);
+      const currentTime = Math.floor(this._element.currentTime);
 
       callback(currentTime);
     });
