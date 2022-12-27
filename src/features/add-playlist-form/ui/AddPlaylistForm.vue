@@ -27,15 +27,21 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { requiredTextRules } from '@/shared/constants';
+import { requiredTextRules, Routes } from '@/shared/constants';
 import { VForm } from 'vuetify/components';
 import { useUserPlaylistStore } from '@/widgets/playlists';
 import { useForm } from '@/shared/model';
+import { useRouter } from 'vue-router';
 
 /**
  * Хранилище списка плейлистов
  */
 const userPlaylistStore = useUserPlaylistStore();
+
+/**
+ * Роутер
+ */
+const router = useRouter();
 
 /**
  * Бизнес-логика для работы с формой
@@ -57,6 +63,10 @@ const handleSubmit = async () => {
     id: '1',
     name: name.value,
     tracks: [],
+  });
+
+  router.push({
+    name: Routes.MAIN_PAGE,
   });
 };
 
