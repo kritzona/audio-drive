@@ -6,8 +6,8 @@
       <DashboardNavigation />
     </v-navigation-drawer>
 
-    <v-navigation-drawer location="right" permanent>
-      Место для плейлиста
+    <v-navigation-drawer width="350" location="right" permanent>
+      <SidebarPlaylist />
     </v-navigation-drawer>
 
     <v-main scrollable>
@@ -39,6 +39,7 @@ import { Player } from '@/widgets/player';
 import DashboardNavigation from '@/app/layouts/dashboard/DashboardNavigation.vue';
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
+import { SidebarPlaylist } from '@/features/playlist';
 
 const route = useRoute();
 
