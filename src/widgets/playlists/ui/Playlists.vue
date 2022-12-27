@@ -6,7 +6,11 @@
         :key="playlist.id"
         :lg="4"
       >
-        <Playlist :name="playlist.name" :tracks="playlist.tracks" />
+        <Playlist
+          :id="playlist.id"
+          :name="playlist.name"
+          :tracks="playlist.tracks"
+        />
       </v-col>
     </v-row>
   </v-container>

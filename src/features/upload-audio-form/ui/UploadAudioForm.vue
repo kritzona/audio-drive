@@ -70,13 +70,23 @@ import { usePlayer } from '@/widgets/player';
 import { ref } from 'vue';
 import { fileToBase64Url } from '@/shared/lib';
 import { VForm } from 'vuetify/components';
-import { requiredFileRules, requiredTextRules } from '@/shared/constants';
+import {
+  requiredFileRules,
+  requiredTextRules,
+  Routes,
+} from '@/shared/constants';
 import { useForm } from '@/shared/model';
+import { useRouter } from 'vue-router';
 
 /**
  * Бизнес-логика для работы с плеером
  */
 const player = usePlayer();
+
+/**
+ * Роутер
+ */
+const router = useRouter();
 
 /**
  * Бизнес-логика для работы с формой
@@ -133,6 +143,10 @@ const handleSubmit = async () => {
     fileName: audioFile.name,
     format: audioFile.type,
     url: await fileToBase64Url(audioFile),
+  });
+
+  router.push({
+    name: Routes.MAIN_PAGE,
   });
 };
 
