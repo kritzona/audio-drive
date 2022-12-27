@@ -21,5 +21,12 @@ export const fileToBlob = async (file: File): Promise<Blob> => {
 export const fileToBase64Url = async (file: File): Promise<string> => {
   const blob = await fileToBlob(file);
 
-  return window.URL.createObjectURL(blob);
+  const reader = new FileReader();
+  reader.readAsDataURL(blob);
+
+  return new Promise((resolve) => {
+    reader.onload = () => {
+      typeof reader.result === 'string' && resolve(reader.result);
+    };
+  });
 };
