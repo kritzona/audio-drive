@@ -138,6 +138,7 @@ export const usePlaylistStore = defineStore(Stores.PLAYLIST, () => {
   };
 
   return {
+    id,
     name,
     tracks,
     currentTrack,
