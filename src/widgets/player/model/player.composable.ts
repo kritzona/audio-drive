@@ -42,7 +42,7 @@ export const usePlayer = () => {
    * @param playNow Флаг для воспроизведения сразу после инициализации
    */
   const initTrack = (audio: AudioModel, playNow = false) => {
-    audioStore.setup(audio, playNow);
+    audioStore.setup(audio, playNow, () => next());
   };
 
   /**
