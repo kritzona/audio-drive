@@ -33,6 +33,12 @@ export const usePlayer = () => {
   onBeforeMount(() => {
     const firstTrack = playlistStore.first();
     if (firstTrack) initTrack(firstTrack);
+
+    audioStore.$subscribe((_mutation, state) => {
+      if (state.ended === true) {
+        next();
+      }
+    });
   });
 
   /**

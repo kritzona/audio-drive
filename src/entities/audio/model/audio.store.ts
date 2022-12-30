@@ -76,6 +76,8 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
    * @async
    */
   const play = async () => {
+    resetEnded();
+
     try {
       await AudioService.play();
 
@@ -83,7 +85,11 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
 
       AudioService.listenTimeChange((seconds) => setElapsedSeconds(seconds));
 
-      AudioService.listenTrackEnd(() => setEnded());
+      AudioService.listenTrackEnd(() => {
+        stop();
+
+        setEnded();
+      });
     } catch {
       setError();
     }
@@ -151,10 +157,14 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
   };
 
   /**
-   * Указать, что трек полностью завершен
+   * Указать, что трек закончился
    */
   const setEnded = () => {
     ended.value = true;
+  };
+
+  const resetEnded = () => {
+    ended.value = false;
   };
 
   /**
