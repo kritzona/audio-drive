@@ -33,6 +33,12 @@ export const usePlayer = () => {
   onBeforeMount(() => {
     const firstTrack = playlistStore.first();
     if (firstTrack) initTrack(firstTrack);
+
+    audioStore.$subscribe((_mutation, state) => {
+      if (state.ended === true) {
+        next();
+      }
+    });
   });
 
   /**
@@ -42,7 +48,7 @@ export const usePlayer = () => {
    * @param playNow Флаг для воспроизведения сразу после инициализации
    */
   const initTrack = (audio: AudioModel, playNow = false) => {
-    audioStore.setup(audio, playNow, () => next());
+    audioStore.setup(audio, playNow);
   };
 
   /**

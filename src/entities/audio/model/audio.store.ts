@@ -40,15 +40,16 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
   const duration = ref<number>(0);
 
   /**
+   * Состояние окончания трека
+   */
+  const ended = ref<boolean>(false);
+
+  /**
    * Инициализация трека в хранилище
    *
    * @param newAudio Новое аудио
    */
-  const setup = (
-    newAudio: AudioModel,
-    playNow = false,
-    onTrackEnd?: () => void
-  ) => {
+  const setup = (newAudio: AudioModel, playNow = false) => {
     reset();
 
     AudioService.change(newAudio, () => {
@@ -58,12 +59,6 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
       if (playNow) {
         play();
       }
-
-      AudioService.listenTrackEnd(() => {
-        stop();
-
-        if (onTrackEnd) onTrackEnd();
-      });
     });
   };
 
@@ -81,12 +76,20 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
    * @async
    */
   const play = async () => {
+    resetEnded();
+
     try {
       await AudioService.play();
 
       setPlaying();
 
       AudioService.listenTimeChange((seconds) => setElapsedSeconds(seconds));
+
+      AudioService.listenTrackEnd(() => {
+        stop();
+
+        setEnded();
+      });
     } catch {
       setError();
     }
@@ -154,6 +157,17 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
   };
 
   /**
+   * Указать, что трек закончился
+   */
+  const setEnded = () => {
+    ended.value = true;
+  };
+
+  const resetEnded = () => {
+    ended.value = false;
+  };
+
+  /**
    * Сброс данных хранилища до исходных значений
    */
   const reset = () => {
@@ -163,6 +177,7 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
     elapsedSeconds.value = 0;
     hasError.value = false;
     duration.value = 0;
+    ended.value = false;
   };
 
   return {
@@ -172,6 +187,7 @@ export const useAudioStore = defineStore(Stores.AUDIO, () => {
     elapsedSeconds,
     hasError,
     duration,
+    ended,
 
     setup,
     play,
