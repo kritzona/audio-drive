@@ -39,7 +39,7 @@ import { Player } from '@/widgets/player';
 import DashboardNavigation from '@/app/layouts/dashboard/DashboardNavigation.vue';
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
-import { SidebarPlaylist } from '@/features/playlist';
+import { SidebarPlaylist } from '@/entities/playlist';
 
 const route = useRoute();
 

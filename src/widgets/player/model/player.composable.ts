@@ -1,6 +1,6 @@
 import { AudioModel } from '@/entities/audio';
 import { useAudioStore } from '@/entities/audio';
-import { usePlaylistStore } from '@/features/playlist';
+import { usePlaylistStore } from '@/entities/playlist';
 import { reactive, onBeforeMount, toRefs } from 'vue';
 
 /**
